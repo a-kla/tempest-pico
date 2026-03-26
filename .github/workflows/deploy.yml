@@ -53,7 +53,7 @@ jobs:
 
       - name: delete Php
         run: |
-          find _site -name "*.php" -type f -delete
+          find public -name "*.php" -type f -delete
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
