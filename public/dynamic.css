@@ -1,0 +1,5 @@
+@charset "UTF-8";
+/* TODO: bundle and minimize (lighningcss ??)  */
+@layer base, components;
+@import "build/assets/uno.css" layer(utilities);
+@import "pico.jade.min.css" layer(base);
