@@ -16,13 +16,13 @@ trait IsView
 
     public ?string $relativeRootPath = null;
 
-    public function __invoke(): String
+    public function __invoke(): string
     {
         return \Tempest\get(TempestViewRenderer::class)->render($this);
     }
 
-    public function __construct(
-    ) {
+    public function __construct()
+    {
         $this->setPaths();
     }
 
@@ -37,7 +37,7 @@ trait IsView
         $this->path = $path->filename()->stripEnd('.php') . '.view.php';
     }
 
-    ### required by tempest
+    // ## required by tempest
 
     public array $data = [];
 
@@ -57,5 +57,4 @@ trait IsView
 
         return $this;
     }
-
 }

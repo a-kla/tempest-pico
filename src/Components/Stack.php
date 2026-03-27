@@ -15,7 +15,7 @@ final class Stack implements View
      **/
     public function __construct(
         public array $components = [],
-        ) {
+    ) {
         $this->setPaths();
     }
 }

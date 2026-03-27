@@ -1,7 +1,7 @@
 <?php
 
-use TempestPico\Components\Markdown;
 use League\CommonMark\MarkdownConverter;
+use TempestPico\Components\Markdown;
 
 use function Tempest\get;
 

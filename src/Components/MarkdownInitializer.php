@@ -28,23 +28,19 @@ final class MarkdownInitializer implements Initializer
             'allow_unsafe_links option' => false,
             'max_nesting_level' => 20,
             'max_delimiters_per_line' => 100,
-
-                'attributes' => [
-        'allow' => ['id', 'class', 'align', 'title'],
-    ],
-
-    'autolink' => [
-        'allowed_protocols' => ['https'], // defaults to ['https', 'http', 'ftp']
-        'default_protocol' => 'https', // defaults to 'http'
-    ],
-            
+            'attributes' => [
+                'allow' => ['id', 'class', 'align', 'title'],
+            ],
+            'autolink' => [
+                'allowed_protocols' => ['https'], // defaults to ['https', 'http', 'ftp']
+                'default_protocol' => 'https', // defaults to 'http'
+            ],
             'smartpunct' => [
-        'double_quote_opener' => '„',
-        'double_quote_closer' => '“',
-        'single_quote_opener' => '‘',
-        'single_quote_closer' => '’',
-    ],
-
+                'double_quote_opener' => '„',
+                'double_quote_closer' => '“',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
         ];
         $environment = new Environment($config);
 
@@ -52,16 +48,14 @@ final class MarkdownInitializer implements Initializer
             ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new FrontMatterExtension())
             // GFM
-->addExtension(new AutolinkExtension())
-# ->addExtension(new DisallowedRawHtmlExtension()) // disallow all: 'html_input' => 'escape'
-->addExtension(new StrikethroughExtension()) // TODO: find a Extension for <ins>
-->addExtension(new TableExtension())
-->addExtension(new TaskListExtension())
+            ->addExtension(new AutolinkExtension())
+            // ->addExtension(new DisallowedRawHtmlExtension()) // disallow all: 'html_input' => 'escape'
+            ->addExtension(new StrikethroughExtension()) // TODO: find a Extension for <ins>
+            ->addExtension(new TableExtension())
+            ->addExtension(new TaskListExtension())
+            ->addExtension(new SmartPunctExtension())
+            ->addExtension(new AttributesExtension());
 
-->addExtension(new SmartPunctExtension())
-->addExtension(new AttributesExtension())
-;
-            
-        return new MarkdownConverter($environment);            
-            }
+        return new MarkdownConverter($environment);
+    }
 }

@@ -12,7 +12,7 @@ final class Card implements View
         public ?View $header = null,
         public ?View $footer = null,
         public ?string $class = null,
-        public ?string $style = null
+        public ?string $style = null,
     ) {
         $this->setPaths();
     }

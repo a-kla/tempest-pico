@@ -2,14 +2,14 @@
 
 /**
  * Base HTML for [Pico](https://picocss.com) CSS styled pages
- * 
+ *
  * TODO: Switch from pre-build to Sass
  * TODO: use post-processor to remove unused CSS
- * 
+ *
  * TODO: How to add the JS a component needs?
- * 
+ *
  * @var \App\Page\Page $this
- * 
+ *
  **/
 ?>
 <x-mybase :title="$this->title">

@@ -2,7 +2,7 @@
 
 /**
  *  @var string|null $title The webpage's title
- * 
+ *
  * ERROR: Tempest use it's own x-base => renamed to x-mybase
  **/
 

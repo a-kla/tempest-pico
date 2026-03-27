@@ -11,7 +11,7 @@ use function Tempest\view;
 final readonly class HomeController
 {
     #[Get('/')]
-    #[StaticPage()]
+    #[StaticPage]
     public function __invoke(): View
     {
         return view('./home.view.php');
