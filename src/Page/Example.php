@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TempestPico\Page;
 
 use Tempest\Router\Get;

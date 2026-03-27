@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace TempestPico\Components;
 
 use Tempest\View\View;
