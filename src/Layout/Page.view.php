@@ -8,7 +8,7 @@
  *
  * TODO: How to add the JS a component needs?
  *
- * @var \App\Page\Page $this
+ * @var \TempestPico\Layout\Page $this
  *
  **/
 ?>

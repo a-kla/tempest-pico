@@ -1,6 +1,6 @@
 <?php
 /**
- * var TempestPico\Components\Stack $this
+ * @var TempestPico\Components\Stack $this
  */
 ?>
 <x-template :foreach="$this->components as $component">

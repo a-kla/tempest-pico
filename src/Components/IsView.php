@@ -26,19 +26,23 @@ trait IsView
         $this->setPaths();
     }
 
-    public function setPaths()
+    public function setPaths(): void
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        // @phpstan-ignore offsetAccess.notFound
         $path = str_ends_with(normalize($trace[0]['file']), 'view/src/functions.php')
+            // @phpstan-ignore offsetAccess.notFound    
             ? path($trace[1]['file'])
+            // @phpstan-ignore offsetAccess.notFound
             : path($trace[0]['file']);
 
         $this->relativeRootPath = $path->dirname()->toString();
         $this->path = $path->filename()->stripEnd('.php') . '.view.php';
     }
 
-    // ## required by tempest
+    ### required by tempest ###
 
+    /** @var mixed[] $data */
     public array $data = [];
 
     public function get(string $key): mixed

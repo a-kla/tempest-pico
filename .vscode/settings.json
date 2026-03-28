@@ -1,5 +1,5 @@
 {
-    "phpstan.singleFileMode": true,
+    "phpstan.singleFileMode": false,
     "phpstan.binPath": "vendor/bin/phpstan",
     "phpstan.binCommand": [],
     "phpstan.configFile": "phpstan.neon,phpstan.neon.dist,phpstan.dist.neon",
@@ -13,8 +13,8 @@
     "phpstan.projectTimeout": 300000,
     "phpstan.timeout": 300000,
     "phpstan.suppressTimeoutMessage": false,
-    "phpstan.showProgress": false,
-    "phpstan.showTypeOnHover": false,
+    "phpstan.showProgress": true,
+    "phpstan.showTypeOnHover": true,
     "phpstan.enableLanguageServer": false,
     "phpstan.ignoreErrors": [
         "Xdebug: .*"
