@@ -1,0 +1,10 @@
+parameters:
+    level: 7
+    scanFiles:
+        - .env
+    paths:
+        - src
+        - app
+        - tests
+    excludePaths:
+        - vendor
