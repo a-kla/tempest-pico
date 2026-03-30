@@ -39,6 +39,11 @@
             "composer fmt",
             "composer phpunit",
             "composer lint"
+        ],
+        "gen": [
+            "./tempest static:clean",
+            "./tempest static:generate",
+            "pnpm unocss"
         ]
     },
     "license": "MIT",
