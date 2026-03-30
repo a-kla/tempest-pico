@@ -16,10 +16,20 @@ declare(strict_types=1);
 
 use Tempest\Support\Uri\Uri; // used in template
 
-use function Tempest\env; // used in template ?>
+use function Tempest\env; // used in template
+use function Tempest\Support\Str\ensure_ends_with;
+
+/*
+ * Make $baseUrl available in the template.
+ *
+ * This is a workaround for the fact that Tempest sometimes puts the template in a function.
+ * Static code analysis tools love this behavior! And I love wasting time debugging it! */
+$scopedVariables['baseUrl'] = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
+
+?>
 <x-mybase :title="$this->title">
   <x-slot name="head">
-    <link rel="stylesheet" href="<?= Uri::from(env('BASE_URI', '/'))->withPath($this->isStatic ? '/static.css' : '/dynamic.css') ?>">
+    <link rel="stylesheet" href="<?= $baseUrl . ($this->isStatic ? 'static' : 'dynamic') ?>.css" />
     {{-- TODO: SEO view--}}
     <meta name="robots" content="noindex,nofollow">
   </x-slot>

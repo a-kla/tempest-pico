@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/** @var TempestPico\Components\Massages $this */
+/** @var TempestPico\Components\Messages $this */
 
 use TempestPico\Components\Card;
 use TempestPico\Components\Markdown;

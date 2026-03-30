@@ -41,8 +41,10 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Link .env
-        run:  ln -sr .env.github .env
+      - name: copy .env & gen key
+        run:  |
+          cp .env.github .env
+          ./tempest key:generate
 
       - name: Generate static site
         run:  composer gen
@@ -53,18 +55,14 @@ jobs:
           cp -r public/* _site/
           find _site -name "*.php" -type f -delete
 
-      - name: delete Php
-        run: |
-          find public -name "*.php" -type f -delete
-
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          # path: _site
-          path: public
+          path: _site
+          # path: public
 
   deploy:
     environment:

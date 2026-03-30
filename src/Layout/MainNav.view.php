@@ -11,15 +11,17 @@ declare(strict_types=1);
 use Tempest\Support\Uri\Uri; // used in template
 
 use function Tempest\env; // used in template
+use function Tempest\Support\Str\ensure_ends_with;
 use function TempestPico\Support\_;
 
-$baseUrl = Uri::from(env('BASE_URI', '/'));
+// Works as expected!
+$baseUrl = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
 
 ?>
 <nav>
   <ul>
     <?php foreach ($this->links as $url => $text): ?>
-      <li><a href="<?= $baseUrl->withPath($url) ?>"><?= _($text) ?></a></li>
+      <li><a href="<?= $baseUrl . $url ?>"><?= _($text) ?></a></li>
     <?php endforeach; ?>
   </ul>
   <ul>

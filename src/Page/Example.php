@@ -7,7 +7,7 @@ namespace TempestPico\Page;
 use Tempest\Router\Get;
 use Tempest\Router\StaticPage;
 use TempestPico\Components\Markdown;
-use TempestPico\Components\Massages;
+use TempestPico\Components\Messages;
 use TempestPico\Components\Stack;
 use TempestPico\Layout\Page;
 
@@ -21,7 +21,7 @@ final readonly class Example
             title: 'Example Page',
             isStatic: true,
             main: new Stack([
-                new Massages([
+                new Messages([
                     [
                         'type' => 'warning',
                         'md' =>
@@ -83,7 +83,7 @@ final readonly class Example
 
                         MD,
                 ),
-                new Massages([
+                new Messages([
                     [
                         'type' => 'error',
                         'md' => 'Just a example Error Msg…',

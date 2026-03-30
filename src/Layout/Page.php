@@ -24,11 +24,11 @@ final class Page implements View
     ) {
         $this->setPaths();
 
-        // BUG: Can't move it inside the view.php because variables are magical Undefined later in the process
         $this->mainNav = new MainNav([
             '' => 'Default Tempest (pur Tailwind) Example',
             'example' => 'My Example & Components',
             'tables' => 'Component: Table',
+            //TODO: 'Components' => [' Cards', 'Markdown', 'Messages', 'Stack', 'Table'],
         ]);
     }
 }

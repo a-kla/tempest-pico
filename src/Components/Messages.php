@@ -6,7 +6,7 @@ namespace TempestPico\Components;
 
 use Tempest\View\View;
 
-final class Massages implements View
+final class Messages implements View
 {
     use IsView;
 
