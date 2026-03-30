@@ -22,3 +22,16 @@ preserve-breaking-array-like = true
 preserve-breaking-parameter-list = true
 preserve-breaking-attribute-list = true
 preserve-breaking-conditional-expression = true
+
+[linter.rules]
+tagged-todo =  { enabled = false }
+literal-named-argument = { enabled = false }
+function-name = { enabled = false }
+
+[analyzer]
+analyze-dead-code = true
+ignore = [ "literal-named-argument", "implicit-to-string-cast" ]
+
+# , "string-member-selector"
+# find-unused-parameters = true
+# enforce-class-finality = true
