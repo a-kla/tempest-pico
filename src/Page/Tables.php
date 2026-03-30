@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TempestPico\Page;
 
 use Tempest\Router\Get;
+use Tempest\Router\StaticPage;
 use TempestPico\Components\Markdown;
 use TempestPico\Components\Stack;
 use TempestPico\Components\Table;
@@ -12,16 +13,16 @@ use TempestPico\Layout\Page;
 
 final readonly class Tables
 {
+    #[StaticPage]
     #[Get('/tables')]
     public function __invoke(): Page
     {
         return new Page(
-            'Component Example: Table',
-            new Stack([
+            title: 'Component Example: Table',
+            isStatic: true,
+            main: new Stack([
                 new Markdown(
                     <<<'MD'
-                        # Example Tables
-
                         You can (ab)use Markdown to create Tables:
 
                         {.striped}
