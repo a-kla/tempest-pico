@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use League\CommonMark\MarkdownConverter;
 use TempestPico\Components\Markdown;
 

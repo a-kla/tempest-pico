@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /** @var TempestPico\Components\Massages $this */
 
 use TempestPico\Components\Card;
@@ -11,7 +13,7 @@ use function Tempest\Support\Arr\map_iterable;
 $cards = new Stack(
     map_iterable(
         $this->msgs,
-        function ($msg) {
+        function (array $msg): Card {
             switch ($msg['type']) {
                 case 'error':
                     return new Card(
