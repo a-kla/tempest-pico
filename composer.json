@@ -42,7 +42,7 @@
         ],
         "gen": [
             "./tempest static:clean",
-            "./tempest static:generate",
+            "./tempest static:generate --verbose",
             "pnpm unocss"
         ]
     },
