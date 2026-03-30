@@ -22,7 +22,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      ### No need to generate the pages, they are in the repro now now 
 
       # - name: Setup Node.js
       #   uses: actions/setup-node@v6
@@ -33,23 +32,26 @@ jobs:
       # - name: Install Node dependencies
       #   run: pnpm install
 
-      # - name: Setup PHP
-      #   uses: shivammathur/setup-php@v2
-      #   with:
-      #     php-version: '8.4'
-      #     tools: composer
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
 
-      # - name: Install PHP dependencies
-      #   run: composer install --no-progress --prefer-dist --optimize-autoloader
+      - name: Install PHP dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      # - name: Generate static site
-      #   run:  ./tempest static:generate && pnpm unocss
+      - name: Link .env
+        run:  ln -sr .env.github .env
 
-      # - name: Prepare pages
-      #   run: |
-      #     mkdir -p _site
-      #     cp -r public/* _site/
-      #     find _site -name "*.php" -type f -delete
+      - name: Generate static site
+        run:  composer gen
+
+      - name: Prepare pages
+        run: |
+          mkdir -p _site
+          cp -r public/* _site/
+          find _site -name "*.php" -type f -delete
 
       - name: delete Php
         run: |
