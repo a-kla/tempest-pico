@@ -41,7 +41,7 @@
             "composer lint"
         ],
         "gen": [
-            "./tempest static:clean",
+            "./tempest static:clean --force",
             "./tempest static:generate --verbose",
             "pnpm unocss"
         ]
