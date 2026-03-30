@@ -11,12 +11,14 @@
  * @var \TempestPico\Layout\Page $this
  *
  **/
-?>
+
+use Tempest\Support\Uri\Uri; // used in template
+
+use function Tempest\env; // used in template ?>
 <x-mybase :title="$this->title">
   <x-slot name="head">
-    <link rel="stylesheet" href="static.css" :if="$this->isStatic">
-    <link rel="stylesheet" href="dynamic.css" :else>
-    <!-- TODO: SEO view-->
+    <link rel="stylesheet" href="<?= Uri::from(env('BASE_URI', '/'))->withPath($this->isStatic ? '/static.css' : '/dynamic.css') ?>">
+    {{-- TODO: SEO view--}}
     <meta name="robots" content="noindex,nofollow">
   </x-slot>
   <header class="container">

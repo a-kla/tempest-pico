@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace TempestPico\Layout;
 
 use Tempest\View\View;
