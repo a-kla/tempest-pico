@@ -28,6 +28,7 @@
       <ul>
         <li><a href="/">Default Tempest (pur Tailwind) Example</a></li>
         <li><a href="/example">My Example & Components</a></li>
+        <li><a href="/tables">Component: Table</a></li>
       </ul>
       <ul>
         <li>
