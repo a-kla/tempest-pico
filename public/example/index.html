@@ -1,141 +1,78 @@
 <!doctype html>
-<html lang="de">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <title>Example Page</title>
-  <link rel="stylesheet" href="/tempest-pico/static.css">
-  <meta name="robots" content="noindex,nofollow">
-</head>
-
-<body>
-  <header class="container">
-    <hgroup>
-      <h1>Tempest-Pico</h1>
-      <p>Components for Tempest Framework with Pico CSS + UnoCSS </p>
-    </hgroup>
-    <nav>
-      <ul>
-        <li><a href="/">Default Tempest (pur Tailwind) Example</a></li>
-        <li><a href="/example">My Example & Components</a></li>
-        <li><a href="/tables">Component: Table</a></li>
-      </ul>
-      <ul>
-        <li>
-          <details class="dropdown">
-            <summary role="button" class="secondary">Theme</summary>
-            <ul>
-              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-              <li><a href="#" data-theme-switcher="light">Light</a></li>
-              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main class="container">
-    <h1>Example Page</h1>
-    <article class="$this->class ; border border-solid border-amber dark:border-amber-600" style="$this->style ;
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>Example Page</title><link rel="stylesheet" href="/tempest-pico/static.css"><meta name="robots" content="noindex,nofollow"></head><body><header class="container"><hgroup><h1>Tempest-Pico</h1><p>Components for Tempest Framework with Pico CSS + UnoCSS </p></hgroup><nav><ul><li><a href="/tempest-pico/">Default Tempest (pur Tailwind) Example</a></li><li><a href="/tempest-pico/example">My Example &amp; Components</a></li><li><a href="/tempest-pico/tables">Component: Table</a></li></ul><ul><li><details class="dropdown"><summary role="button" class="secondary">Theme</summary><ul><li><a href="#" data-theme-switcher="auto">Auto</a></li><li><a href="#" data-theme-switcher="light">Light</a></li><li><a href="#" data-theme-switcher="dark">Dark</a></li></ul></details></li></ul></nav></header><main class="container"><h1>Example Page</h1><article class="$this->class ; border border-solid border-amber dark:border-amber-600" style="$this->style ;
               --pico-card-border-color: light-dark(#f2df0d, #e17100);
               --pico-card-background-color: light-dark(#f2df0d33, #ffbf0033);
               --pico-card-sectioning-background-color: light-dark(#f2df0d, #e17100);
-            ">
-      <header>
-        <p><strong>Warning</strong></p>
-      </header>
-      <p>Tempest 3 is out, but require PHP 8.5. I can not update now, but <strong>provide a v3 branch later</strong>.
-      </p>
-      <p>The „class=&quot;$this-&gt;class&quot;-Bug“ is fixed in v3.0.</p>
-    </article>
+            ">                <header><p><strong>Warning</strong></p></header>
+              <p>Tempest 3 is out, but require PHP 8.5. I can not update now, but <strong>provide a v3 branch later</strong>.</p>
+<p>The „class=&quot;$this-&gt;class&quot;-Bug“ is fixed in v3.0.</p>  </article>
 
-    <article class="$this->class " style="$this->style ;
+  <article class="$this->class " style="$this->style ;
               --pico-card-background-color: light-dark(#9bccfd, #1343a0);
-            ">
-      <h1>Features</h1>
-      <ul>
-        <li><input checked="" disabled="" type="checkbox"> Full Markdown (Tempests x-markdown only use core Markdown)
-        </li>
-        <li><input checked="" disabled="" type="checkbox"> CSS: <a href="https://picocss.com/">Pico</a> + <a
-            href="https://">UnoCSS</a></li>
-        <li><input checked="" disabled="" type="checkbox"> Front Matter support</li>
-        <li><input disabled="" type="checkbox"> Makes use of Front Matter</li>
-      </ul>
-    </article>
+            ">  <h1>Features</h1>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Full Markdown (Tempests x-markdown only use core Markdown)</li>
+<li><input checked="" disabled="" type="checkbox"> CSS: <a href="https://picocss.com/">Pico</a> + <a href="https://">UnoCSS</a></li>
+<li><input checked="" disabled="" type="checkbox"> Front Matter support</li>
+<li><input disabled="" type="checkbox"> Makes use of Front Matter</li>
+</ul>  </article>
 
-    <h1>Markdown Example</h1>
-    <blockquote>
-      <p>I still miss <a href="https://github.com/phplang/xhp">XHP</a>! Every time I try a <em>“modern”</em> PHP
-        template engine, I feel like I’m <strong>back in the Stone Age</strong>.</p>
-    </blockquote>
-    <ul>
-      <li>HTML like &lt;a /&gt; is displayed</li>
-      <li><a href="https://picocss.com/">Pico</a> as base CSS for semantic HTML without scores and scores of classes.
-      </li>
-      <li><del>ACSS</del> UnoCSS for additional CSS</li>
-    </ul>
-    <h2 class="bg-pico-primary-background text-pico-primary-inverse text-center">Tailwind-like class names</h2>
-    <p>You can add <strong class="text-3xl underline">CSS inside Markdown</strong>, just run
-      <code>pnpm unocss --watch</code> and add <code>{class=&quot;…&quot;}</code> to your MD (or Component).</p>
-    <p>The Headline above is styled with
-      <code>{ class=&quot;bg-pico-primary-background text-pico-primary-inverse text-center&quot; }</code>, wich make use
-      of the <a href="https://picocss.com/docs/css-variables">Pico custom properties</a>.</p>
-    <p class="text-pico-primary">This paragraf is styled using the class <code>text-pico-primary</code></p>
-    <blockquote>
-      <p>I like the short class names of <a href="https://acss.io">the good old ACSS</a>. May I go back to it.</p>
-    </blockquote>
-    <table class="striped border-blue">
-      <thead>
-        <tr>
-          <th align="center">CSS</th>
-          <th align="left">ACSS class</th>
-          <th align="right">Tailwind class</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td align="center">color:red;</td>
-          <td align="left">C(red)</td>
-          <td align="right">text-red</td>
-        </tr>
-        <tr>
-          <td align="center">text-align: justify;</td>
-          <td align="left">Ta(j)</td>
-          <td align="right">text-justify</td>
-        </tr>
-        <tr>
-          <td align="center">text-align-last: center;</td>
-          <td align="left">Tal(c)</td>
-          <td align="right">{I don’t know}</td>
-        </tr>
-      </tbody>
-    </table>
-    <p><code>.striped</code> is a Pico class for striped Tables btw.
-      The shortcut <code>{.class}</code> only works for known classes or static Pages. UnoCSS (and other utilities)
-      don’t detect classes without <code>class=</code>. For static Pages I simply run UnoCSS over the generated HTML.
-    </p>
-    <h2>TODO:</h2>
-    <ol>
-      <li>Make more Components</li>
-      <li>Upgrade to Tempest v3</li>
-      <li>Improve Doc/example</li>
-      <li>see in-source <code>TODO:</code>s</li>
-      <li>much more…</li>
-    </ol>
+  <h1>Markdown Example</h1>
+<blockquote>
+<p>I still miss <a href="https://github.com/phplang/xhp">XHP</a>! Every time I try a <em>“modern”</em> PHP template engine, I feel like I’m <strong>back in the Stone Age</strong>.</p>
+</blockquote>
+<ul>
+<li>HTML like &lt;a /&gt; is displayed</li>
+<li><a href="https://picocss.com/">Pico</a> as base CSS for semantic HTML without scores and scores of classes.</li>
+<li><del>ACSS</del> UnoCSS for additional CSS</li>
+</ul>
+<h2 class="bg-pico-primary-background text-pico-primary-inverse text-center">Tailwind-like class names</h2>
+<p>You can add <strong class="text-3xl underline">CSS inside Markdown</strong>, just run <code>pnpm unocss --watch</code> and add <code>{class=&quot;…&quot;}</code> to your MD (or Component).</p>
+<p>The Headline above is styled with <code>{ class=&quot;bg-pico-primary-background text-pico-primary-inverse text-center&quot; }</code>, wich make use of the <a href="https://picocss.com/docs/css-variables">Pico custom properties</a>.</p>
+<p class="text-pico-primary">This paragraf is styled using the class <code>text-pico-primary</code></p>
+<blockquote>
+<p>I like the short class names of <a href="https://acss.io">the good old ACSS</a>. May I go back to it.</p>
+</blockquote>
+<table class="striped border-blue">
+<thead>
+<tr>
+<th align="center">CSS</th>
+<th align="left">ACSS class</th>
+<th align="right">Tailwind class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">color:red;</td>
+<td align="left">C(red)</td>
+<td align="right">text-red</td>
+</tr>
+<tr>
+<td align="center">text-align: justify;</td>
+<td align="left">Ta(j)</td>
+<td align="right">text-justify</td>
+</tr>
+<tr>
+<td align="center">text-align-last: center;</td>
+<td align="left">Tal(c)</td>
+<td align="right">{I don’t know}</td>
+</tr>
+</tbody>
+</table>
+<p><code>.striped</code> is a Pico class for striped Tables btw.
+The shortcut <code>{.class}</code> only works for known classes or static Pages. UnoCSS (and other utilities) don’t detect classes without <code>class=</code>. For static Pages I simply run UnoCSS over the generated HTML.</p>
+<h2>TODO:</h2>
+<ol>
+<li>Make more Components</li>
+<li>Upgrade to Tempest v3</li>
+<li>Improve Doc/example</li>
+<li>see in-source <code>TODO:</code>s</li>
+<li>much more…</li>
+</ol>
 
-    <article class="$this->class ; outline-4 outline-double outline-red" style="$this->style ;
+  <article class="$this->class ; outline-4 outline-double outline-red" style="$this->style ;
               --pico-card-background-color: #ff000060;
               --pico-card-border-color: rgb(248 113 113);
               --pico-card-sectioning-background-color: #ff0000c0;
-            ">
-      <header>
-        <p><strong>Error</strong></p>
-      </header>
-      <p>Just a example Error Msg…</p>
-    </article>
-  </main>
-</body>
-
-</html>
+            ">                <header><p><strong>Error</strong></p></header>
+              <p>Just a example Error Msg…</p>  </article></main></body></html>
