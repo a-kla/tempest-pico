@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Base HTML for [Pico](https://picocss.com) CSS styled pages
  *
@@ -26,25 +28,7 @@ use function Tempest\env; // used in template ?>
       <h1>Tempest-Pico</h1>
       <p>Components for Tempest Framework with Pico CSS + UnoCSS </p>
     </hgroup>
-    <nav>
-      <ul>
-        <li><a href="/">Default Tempest (pur Tailwind) Example</a></li>
-        <li><a href="/example">My Example & Components</a></li>
-        <li><a href="/tables">Component: Table</a></li>
-      </ul>
-      <ul>
-        <li>
-          <details class="dropdown">
-            <summary role="button" class="secondary">Theme</summary>
-            <ul>
-              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-              <li><a href="#" data-theme-switcher="light">Light</a></li>
-              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </nav>
+    {!! ($this->mainNav)() !!}
   </header>
   <main class="container">
     <h1>{{ $this->title }}</h1>
