@@ -11,12 +11,16 @@ use TempestPico\Components\Messages;
 use TempestPico\Components\Stack;
 use TempestPico\Layout\Page;
 
+use function Tempest\Support\Filesystem\read_file;
+
 final readonly class Example
 {
     #[StaticPage]
     #[Get('/example')]
     public function __invoke(): Page
     {
+        $readme = read_file(__DIR__ . '/../../README.md');
+
         return new Page(
             title: 'Example Page',
             isStatic: true,
@@ -31,14 +35,7 @@ final readonly class Example
                     ],
                     [
                         'type' => 'info',
-                        'md' => <<<'MD'
-                            # Features
-
-                            - [x] Full Markdown (Tempests x-markdown only use core Markdown)
-                            - [x] CSS: [Pico](https://picocss.com/) + [UnoCSS](https://)
-                            - [x] Front Matter support
-                            - [ ] Makes use of Front Matter
-                            MD,
+                        'md' => 'This is a example page to show some of the features of Tempest Pico. For a list of components and their documentation, check out the [Components page](/doc/component).',
                     ],
                 ]),
                 new Markdown(
@@ -46,6 +43,14 @@ final readonly class Example
                         # Markdown Example
 
                         > I still miss [XHP](https://github.com/phplang/xhp)! Every time I try a *“modern”* PHP template engine, I feel like I’m **back in the Stone Age**.
+
+                        ## Features
+
+                        - [x] Full Markdown (Tempests x-markdown only use core Markdown)
+                        - [x] CSS: [Pico](https://picocss.com/) + [UnoCSS](https://)
+                        - [x] Front Matter support
+                        - [ ] Makes use of Front Matter
+
 
                         - HTML like <a /> is displayed
                         - [Pico](https://picocss.com/) as base CSS for semantic HTML without scores and scores of classes.
@@ -89,6 +94,7 @@ final readonly class Example
                         'md' => 'Just a example Error Msg…',
                     ],
                 ]),
+                new Markdown("# The Readme\n\n" . $readme),
             ]),
         );
     }

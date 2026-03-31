@@ -19,6 +19,7 @@ use Tempest\View\View;
  *      vertical: bool, // UNIMPLEMENTED
  * }
  */
+#[Doc('A component that allows you to create tables.', ['Helper', 'Pico'])]
 final class Table implements View
 {
     use IsView;

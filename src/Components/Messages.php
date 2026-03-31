@@ -6,6 +6,7 @@ namespace TempestPico\Components;
 
 use Tempest\View\View;
 
+#[Doc('Renders the given messages card-like. Type can be error, warning or info.', ['Custom'])]
 final class Messages implements View
 {
     use IsView;

@@ -25,10 +25,10 @@ final class Page implements View
         $this->setPaths();
 
         $this->mainNav = new MainNav([
-            '' => 'Default Tempest (pur Tailwind) Example',
-            'example' => 'My Example & Components',
-            'tables' => 'Component: Table',
-            //TODO: 'Components' => [' Cards', 'Markdown', 'Messages', 'Stack', 'Table'],
+            '' => 'Default Tempest Example',
+            'example' => 'My Example',
+            'doc/component' => 'Components',
+            'tables' => 'Table Example',
         ]);
     }
 }

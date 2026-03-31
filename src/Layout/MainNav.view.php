@@ -24,6 +24,7 @@ $baseUrl = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
       <li><a href="<?= $baseUrl . $url ?>"><?= _($text) ?></a></li>
     <?php endforeach; ?>
   </ul>
+  {{--
   <ul>
     <li>
       <details class="dropdown">
@@ -36,4 +37,5 @@ $baseUrl = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
       </details>
     </li>
   </ul>
+  --}}
 </nav>

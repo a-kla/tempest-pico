@@ -6,6 +6,7 @@ namespace TempestPico\Components;
 
 use Tempest\View\View;
 
+#[Doc('Puts the content inside a `<article>` tag, Pico styles it card-like.', ['Pico'])]
 final class Card implements View
 {
     use IsView;
