@@ -2,6 +2,7 @@
 node_modules/
 vendor/
 /public/main.css
+/public/**/*.html
 /package-lock.json
 /.php-cs-fixer.cache
 .env
