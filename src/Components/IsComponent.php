@@ -4,26 +4,31 @@ declare(strict_types=1);
 
 namespace TempestPico\Components;
 
-use Tempest\View\Renderers\TempestViewRenderer;
+use Tempest\Support\Html\HtmlString;
 
 use function Tempest\Support\path;
 use function Tempest\Support\Path\normalize;
 
 /** @phpstan-require-implements \Tempest\View\View */
-trait IsView
+trait IsComponent
 {
     public string $path;
 
     public ?string $relativeRootPath = null;
 
-    public function __invoke(): string
-    {
-        return \Tempest\get(TempestViewRenderer::class)->render($this);
-    }
-
     public function __construct()
     {
         $this->setPaths();
+    }
+
+    public function __invoke(): HtmlString
+    {
+        return $this->toHtml();
+    }
+
+    public function toHtml(): HtmlString
+    {
+        return $this->getViewTree()->render();
     }
 
     public function setPaths(): void

@@ -30,6 +30,7 @@ final class MarkdownInitializer implements Initializer
             'allow_unsafe_links option' => false,
             'max_nesting_level' => 20,
             'max_delimiters_per_line' => 100,
+
             'attributes' => [
                 'allow' => ['id', 'class', 'align', 'title'],
             ],

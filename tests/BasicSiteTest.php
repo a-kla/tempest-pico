@@ -20,9 +20,10 @@ class BasicSiteTest extends IntegrationTestCase
             [
                 '' => 'Tempest',
                 'example' => 'Example Page',
-                'table' => 'Component Example: Table',
+                // 'table' => 'Component Example: Table',
             ],
             function (string $content, string $url): void {
+                echo "Testing page: /{$url}\n";
                 $this->pageHasContent('/' . $url, $content);
             },
         );

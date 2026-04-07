@@ -24,20 +24,20 @@ final readonly class Example
         return new Page(
             title: 'Example Page',
             isStatic: true,
-            main: new Stack([
-                new Messages([
+            main: new Stack(
+                new Messages(
                     [
-                        'type' => 'warning',
+                        'variant' => 'warning',
                         'md' =>
                             'Tempest 3 is out, but require PHP 8.5. I can not update now, but **provide a v3 branch later**.'
                                 . "\n\n"
-                                . 'The "class=\"$this->class\"-Bug" is fixed in v3.0.',
+                                . 'The "class=\"$this->class\"-Bug" is fixed in Tempest v3.0.',
                     ],
                     [
-                        'type' => 'info',
+                        'variant' => 'info',
                         'md' => 'This is a example page to show some of the features of Tempest Pico. For a list of components and their documentation, check out the [Components page](/doc/component).',
                     ],
-                ]),
+                ),
                 new Markdown(
                     <<<'MD'
                         # Markdown Example
@@ -88,14 +88,14 @@ final readonly class Example
 
                         MD,
                 ),
-                new Messages([
+                new Messages(
                     [
-                        'type' => 'error',
+                        'variant' => 'error',
                         'md' => 'Just a example Error Msg…',
                     ],
-                ]),
+                ),
                 new Markdown("# The Readme\n\n" . $readme),
-            ]),
+            ),
         );
     }
 }

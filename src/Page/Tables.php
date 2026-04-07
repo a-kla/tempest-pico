@@ -20,7 +20,7 @@ final readonly class Tables
         return new Page(
             title: 'Component Example: Table',
             isStatic: true,
-            main: new Stack([
+            main: new Stack(
                 new Markdown(
                     <<<'MD'
                         You can (ab)use Markdown to create Tables:
@@ -69,7 +69,7 @@ final readonly class Tables
                         fallback: new Markdown("> I don't know"),
                     ),
                 ),
-            ]),
+            ),
         );
     }
 }

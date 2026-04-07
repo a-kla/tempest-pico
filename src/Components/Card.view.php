@@ -7,10 +7,5 @@
 
 /* NOTE: :isset don't work with properties */
 // echo isset($this->header) ? '✔️' : '❌';
-
 ?>
-<article :class="$this->class" :style="$this->style">
-  <header :if="$this->header !== null">{!! ($this->header)() !!}</header>
-  {!! ($this->content)() !!}
-  <footer :if="$this->footer !== null">{!! ($this->footer)() !!}</footer>
-</article>
+<?= $this() ?>

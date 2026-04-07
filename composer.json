@@ -32,7 +32,7 @@
         "post-autoload-dump": [
             "@php ./vendor/bin/tempest discovery:generate --no-interaction"
         ],
-        "phpunit": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
+        "phpunit": "vendor/bin/phpunit --testdox --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
         "fmt": "vendor/bin/mago fmt",
         "lint": "vendor/bin/mago lint --fix --format-after-fix",
         "qa": [
