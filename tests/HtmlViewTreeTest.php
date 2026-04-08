@@ -6,7 +6,6 @@ namespace Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Support\Html\HtmlString;
 use TempestPico\Support\Html\Exception\InvalidTag;
 use TempestPico\Support\Html\Exception\VoidWithContent;
 use TempestPico\Support\Html\HtmlViewTree;
@@ -14,7 +13,6 @@ use Tests\Views\Footer;
 use Tests\Views\HeaderView;
 use Tests\Views\Main;
 
-use function Tempest\Support\arr;
 use function Tempest\Support\Arr\map_iterable;
 use function Tempest\Support\str;
 use function TempestPico\Support\Html;
@@ -30,10 +28,10 @@ class HtmlViewTreeTest extends TestCase
     public function rendersWithContent(): void
     {
         $text = 'Text';
-        $AHT = (new HtmlViewTree())('p', [$text]);
+        $VT = (new HtmlViewTree())('p', [$text]);
         $expected = "<p>{$text}</p>";
 
-        $html = $AHT->render();
+        $html = $VT->render();
         print_r($html);
 
         $this->assertSame(
@@ -46,25 +44,25 @@ class HtmlViewTreeTest extends TestCase
     public function rendersAppendedContent(): void
     {
         $text = 'Text';
-        $AHT = (new HtmlViewTree())('p')->appendContent($text);
+        $VT = (new HtmlViewTree())('p')->appendContent($text);
         $expected = "<p>{$text}</p>";
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
     #[Test]
     public function HelperFunctionHtml(): void
     {
-        $AHT = Html('br');
+        $VT = Html('br');
 
         $expected = '<br />';
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -73,28 +71,28 @@ class HtmlViewTreeTest extends TestCase
     {
         $var = '<';
         $func = fn () => VT(' />'); // Helper Function VT (View Tree)
-        $AHT = VT($var, 'br', $func(), Html('br'));
+        $VT = VT($var, 'br', $func(), Html('br'));
 
         $expected = '&lt;br /&gt;<br />';
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
     #[Test]
     public function canAppendContentMultiTimes(): void
     {
-        $AHT = Html('html')('body')('main', [html('h1', ['Headline'])]);
+        $VT = Html('html')('body')('main', [html('h1', ['Headline'])]);
 
-        $AHT = $AHT->appendContent(
+        $VT = $VT->appendContent(
             Html('hr'),
         );
-        $AHT = $AHT->appendContent(
+        $VT = $VT->appendContent(
             Html('p', ['some Text']),
         );
-        $AHT = $AHT->appendContent(
+        $VT = $VT->appendContent(
             Html('p', ['more Text']),
         );
 
@@ -102,7 +100,7 @@ class HtmlViewTreeTest extends TestCase
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -126,14 +124,14 @@ class HtmlViewTreeTest extends TestCase
     {
         $attr = ['class' => 'fancyHr', 'style' => '--color("red")', 'data-test' => true];
 
-        $AHT = Html('p', [], $attr);
+        $VT = Html('p', [], $attr);
 
         $expected = '<p class="fancyHr" style="--color("red")" data-test />';
 
         $this->assertSame(
             $expected,
 
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -142,24 +140,24 @@ class HtmlViewTreeTest extends TestCase
     {
         $this->expectException(InvalidTag::class);
 
-        $AHT = Html('div')('p')('customTag');
+        $VT = Html('div')('p')('customTag');
         $expected = '<div><p><customTag /></p></div>';
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
     #[Test]
     public function AllowsCustomElements(): void
     {
-        $AHT = Html('div')('p')->customTag('customTag');
+        $VT = Html('div')('p')->customTag('customTag');
         $expected = '<div><p><customTag /></p></div>';
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -177,12 +175,12 @@ class HtmlViewTreeTest extends TestCase
     {
         // $this->expectException(AttributesForNull::class);
 
-        $AHT = Html(element: null, attributes: ['just' => 'warn'], content: ['some']);
+        $VT = Html(element: null, attributes: ['just' => 'warn'], content: ['some']);
         $expected = 'some';
 
         $this->assertSame(
             $expected,
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -195,7 +193,7 @@ class HtmlViewTreeTest extends TestCase
         $footer = new Footer("Has {$dangers} content");
         $main = new Main('Get IDE support');
 
-        $AHT = Html('body', [$main, $footer]);
+        $VT = Html('body', [$main, $footer]);
 
         $expected = str(<<<'HTML'
             <body>
@@ -210,7 +208,7 @@ class HtmlViewTreeTest extends TestCase
 
         $this->assertSame(
             $expected->toString(),
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -222,7 +220,7 @@ class HtmlViewTreeTest extends TestCase
         // classic view.php
         $header = new HeaderView('New Home');
 
-        $AHT = Html('body', [$header]);
+        $VT = Html('body', [$header]);
 
         $expected = str(<<<'HTML'
             <body>
@@ -232,7 +230,7 @@ class HtmlViewTreeTest extends TestCase
 
         $this->assertSame(
             $expected->toString(),
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 
@@ -287,7 +285,7 @@ class HtmlViewTreeTest extends TestCase
         // Caution! Renders the main View NOW, all others on `render()`
         $main = Html('main', [$aside, $main()->unwrap('<main>', '</main>')]);
 
-        $AHT = Html('body', [$header, $main, $footer]);
+        $VT = Html('body', [$header, $main, $footer]);
 
         $expected = str(<<<'HTML'
             <body>
@@ -308,7 +306,7 @@ class HtmlViewTreeTest extends TestCase
 
         $this->assertSame(
             $expected->toString(),
-            $AHT->render()->toString(),
+            $VT->render()->toString(),
         );
     }
 }
