@@ -6,7 +6,7 @@ namespace TempestPico\Components;
 
 use League\CommonMark\MarkdownConverter;
 use Tempest\Support\Html\HtmlString;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function Tempest\get;
 use function TempestPico\Support\Html;
@@ -22,7 +22,7 @@ final class Markdown implements Component
         $this->setPaths();
     }
 
-    public function getViewTree(): HTMLBuilder
+    public function getViewTree(): HtmlViewTree
     {
         $markdown = get(MarkdownConverter::class);
         /* Using directly HtmlString is dangerous,

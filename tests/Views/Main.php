@@ -8,11 +8,11 @@ use League\CommonMark\CommonMarkConverter;
 use Tempest\Support\Html\HtmlString;
 use TempestPico\Components\Component;
 use TempestPico\Components\IsComponent;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function TempestPico\Support\Html;
 
-/** A Component that makes use of HTMLBuilder */
+/** A Component that makes use of HtmlViewTree */
 final class Main implements Component
 {
     use IsComponent;
@@ -23,7 +23,7 @@ final class Main implements Component
         $this->setPaths();
     }
 
-    public function getViewTree(): HTMLBuilder
+    public function getViewTree(): HtmlViewTree
     {
         $fromMarkdown = new HtmlString(
             new CommonMarkConverter()

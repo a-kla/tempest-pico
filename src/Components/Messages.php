@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TempestPico\Components;
 
 use Tempest\Support\Arr\ImmutableArray;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function Tempest\Support\arr;
 use function TempestPico\Support\Html;
@@ -28,7 +28,7 @@ final class Messages implements Component
         $this->setPaths();
     }
 
-    public function getViewTree(): HTMLBuilder
+    public function getViewTree(): HtmlViewTree
     {
         return Html(
             element: null,

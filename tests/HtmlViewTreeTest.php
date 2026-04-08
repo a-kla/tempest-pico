@@ -9,39 +9,28 @@ use PHPUnit\Framework\TestCase;
 use Tempest\Support\Html\HtmlString;
 use TempestPico\Support\Html\Exception\InvalidTag;
 use TempestPico\Support\Html\Exception\VoidWithContent;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 use Tests\Views\Footer;
 use Tests\Views\HeaderView;
 use Tests\Views\Main;
 
 use function Tempest\Support\arr;
+use function Tempest\Support\Arr\map_iterable;
 use function Tempest\Support\str;
 use function TempestPico\Support\Html;
+use function TempestPico\Support\VT;
 
 /**
  * @internal
  */
 // @mago-expect lint:too-many-methods
-class HTMLBuilderTest extends TestCase
+class HtmlViewTreeTest extends TestCase
 {
-    #[Test]
-    public function dosNotRenderEmptyNodes(): void
-    {
-        $html = (new HTMLBuilder())(null)('p')(element: null)(null)->render();
-
-        $expected = '<p />';
-
-        $this->assertSame(
-            $expected,
-            $html->toString(),
-        );
-    }
-
     #[Test]
     public function rendersWithContent(): void
     {
         $text = 'Text';
-        $AHT = (new HTMLBuilder())('p', [$text]);
+        $AHT = (new HtmlViewTree())('p', [$text]);
         $expected = "<p>{$text}</p>";
 
         $html = $AHT->render();
@@ -57,7 +46,7 @@ class HTMLBuilderTest extends TestCase
     public function rendersAppendedContent(): void
     {
         $text = 'Text';
-        $AHT = (new HTMLBuilder())('p')->appendContent($text);
+        $AHT = (new HtmlViewTree())('p')->appendContent($text);
         $expected = "<p>{$text}</p>";
 
         $this->assertSame(
@@ -67,7 +56,7 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function HelperFunktion(): void
+    public function HelperFunctionHtml(): void
     {
         $AHT = Html('br');
 
@@ -80,7 +69,22 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function canAppendContentMultitimes(): void
+    public function generatesEscapedStrings(): void
+    {
+        $var = '<';
+        $func = fn () => VT(' />'); // Helper Function VT (View Tree)
+        $AHT = VT($var, 'br', $func(), Html('br'));
+
+        $expected = '&lt;br /&gt;<br />';
+
+        $this->assertSame(
+            $expected,
+            $AHT->render()->toString(),
+        );
+    }
+
+    #[Test]
+    public function canAppendContentMultiTimes(): void
     {
         $AHT = Html('html')('body')('main', [html('h1', ['Headline'])]);
 
@@ -103,37 +107,17 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function AllowsEmptyRootWithContent(): void
+    public function AllowsEmptyNodes(): void
     {
-        $html = new HTMLBuilder()->appendContent(
-            new HtmlString('<hr />'),
-            new HtmlString('<p>Test</p>'),
-        );
+        $node1 = null;
+        $node2 = 'p';
+        $html = (new HtmlViewTree())($node1)($node2)(element: null)(null)->render();
 
-        $expected = '<hr /><p>Test</p>';
+        $expected = '<p />';
 
         $this->assertSame(
             $expected,
-            $html->render()->toString(),
-        );
-    }
-
-    #[Test]
-    public function AllowsEmptyRootWithContentUsingHelperFun(): void
-    {
-        $AHT = Html(
-            element: null,
-            content: [
-                Html('hr'),
-                Html('p', ['Test']),
-            ],
-        );
-
-        $expected = '<hr /><p>Test</p>';
-
-        $this->assertSame(
-            $expected,
-            $AHT->render()->toString(),
+            $html->toString(),
         );
     }
 
@@ -168,7 +152,7 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function AllowsCustomTag(): void
+    public function AllowsCustomElements(): void
     {
         $AHT = Html('div')('p')->customTag('customTag');
         $expected = '<div><p><customTag /></p></div>';
@@ -180,11 +164,11 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function ThrowsOnVoidTagWithContent(): void
+    public function ThrowsOnVoidElementWithContent(): void
     {
         $this->expectException(VoidWithContent::class);
 
-        (new HTMLBuilder())('br')
+        (new HtmlViewTree())('br')
             ->appendContent('This shall not work!');
     }
 
@@ -203,7 +187,7 @@ class HTMLBuilderTest extends TestCase
     }
 
     #[Test]
-    public function useComponentsAsContent(): void
+    public function worksWithComponentsAsContent(): void
     {
         $dangers = '<script … />';
 
@@ -230,6 +214,28 @@ class HTMLBuilderTest extends TestCase
         );
     }
 
+    //FIXME: #[Test]
+    // My try throws Error because Tempest $container is null
+    // May only needs a Testing setup?
+    public function worksWithViewsAsContent(): void
+    {
+        // classic view.php
+        $header = new HeaderView('New Home');
+
+        $AHT = Html('body', [$header]);
+
+        $expected = str(<<<'HTML'
+            <body>
+                <header><a href="\">New Home</a></header>
+            </body>
+            HTML)->replaceRegex('/>\s*</', '><');
+
+        $this->assertSame(
+            $expected->toString(),
+            $AHT->render()->toString(),
+        );
+    }
+
     #[Test]
     public function ExampleList(): void
     {
@@ -240,9 +246,10 @@ class HTMLBuilderTest extends TestCase
         $html = Html(
             element: $ordert ? 'ol' : 'ul',
             attributes: ['class' => 'list'],
-            content: arr($items)->map(
+            content: map_iterable(
+                $items,
                 static fn ($item, $id) => Html('li', ["Item #{$id} {$item}"]),
-            )->toArray(),
+            ),
         );
 
         $expected = '<ol class="list"><li>Item #1 Foo</li><li>Item #4 Bar</li><li>Item #9 Baz</li></ol>';

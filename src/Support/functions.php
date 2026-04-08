@@ -10,23 +10,23 @@ use Tempest\Support\Html\HtmlString;
 use Tempest\Support\Str\ImmutableString;
 use Tempest\View\View;
 use TempestPico\Components\Component;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function Tempest\Support\Arr\implode;
 
 /**
  * @param array<string, null|string|Stringable|bool> $attributes
- * @param array<HTMLBuilder|string|Stringable|HtmlString|View|null> $content
+ * @param array<HtmlViewTree|string|Stringable|HtmlString|View|null> $content
  * */
-function Html(?string $element, array $content = [], array $attributes = []): HTMLBuilder
+function Html(?string $element, array $content = [], array $attributes = []): HtmlViewTree
 {
-    return (new HTMLBuilder())(element: $element, attributes: $attributes, content: $content);
+    return (new HtmlViewTree())(element: $element, attributes: $attributes, content: $content);
 }
 
 /** View Tree */
-function VT(HTMLBuilder|string|Stringable|HtmlString|View|null ...$content): HTMLBuilder
+function VT(HtmlViewTree|string|Stringable|HtmlString|View|null ...$content): HtmlViewTree
 {
-    return (new HTMLBuilder())(content: $content, element: null);
+    return (new HtmlViewTree())(content: $content, element: null);
 }
 
 /**

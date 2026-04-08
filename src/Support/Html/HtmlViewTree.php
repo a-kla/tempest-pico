@@ -23,9 +23,8 @@ use function TempestPico\Support\escape;
 /**
  * Build and render a Abstract Html Tree
  *
- *
  */
-final class HTMLBuilder
+final class HtmlViewTree
 {
     // Disallow Content
     public private(set) bool $isVoid = false;
@@ -65,7 +64,7 @@ final class HTMLBuilder
         if ($element === null) {
             try {
                 if (arr($attributes)->isNotEmpty()) {
-                    throw new Exception\AttributesForNull($attributes);
+                    throw new Exception\AttributesForNull(print_r($attributes, true));
                 }
             } catch (Exception\AttributesForNull $e) {
                 // Just warn
@@ -147,9 +146,6 @@ final class HTMLBuilder
      * */
     public function __invoke(?string $element, array $content = [], array $attributes = []): self
     {
-        // $node = $this->current ?? $this;
-
-        // $this->current =
         $this->appendElement(element: $element, content: $content, attributes: $attributes);
 
         return $this;
@@ -164,10 +160,6 @@ final class HTMLBuilder
         }
 
         $attributes = $node->attributes ? format_attributes($node->attributes) : '';
-
-        // if ($node->children->isEmpty()) {
-        //     return new HtmlString("<{$node->element}{$attributes} />");
-        // }
 
         $html = $node->children->map(
             static function ($value, $_) {

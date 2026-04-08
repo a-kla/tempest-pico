@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TempestPico\Components;
 
 use Tempest\Support\Html\HtmlString;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function TempestPico\Support\composeStr;
 use function TempestPico\Support\Html;
@@ -29,7 +29,7 @@ final class Card implements Component
         $this->setPaths();
     }
 
-    public function getViewTree(): HTMLBuilder
+    public function getViewTree(): HtmlViewTree
     {
         return Html(
             element: 'article',

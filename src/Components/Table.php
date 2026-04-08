@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TempestPico\Components;
 
 use Tempest\View\View;
-use TempestPico\Support\Html\HTMLBuilder;
+use TempestPico\Support\Html\HtmlViewTree;
 
 use function Tempest\Support\Arr\has_key;
 use function Tempest\Support\Arr\keys;
@@ -75,7 +75,7 @@ final class Table implements Component
         ];
     }
 
-    public function getViewTree(): HTMLBuilder
+    public function getViewTree(): HtmlViewTree
     {
         $getCellContent = fn (array $row, string $rowId) => has_key($row, $rowId)
             ? $row[$rowId]
