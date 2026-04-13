@@ -1,0 +1,62 @@
+{
+    "/:GET": {
+        "isDynamic": false,
+        "uri": "/",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    },
+    "/doc/:GET": {
+        "isDynamic": false,
+        "uri": "/doc/",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    },
+    "/doc/components:GET": {
+        "isDynamic": false,
+        "uri": "/doc/components",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    },
+    "/doc/readme:GET": {
+        "isDynamic": false,
+        "uri": "/doc/readme",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    },
+    "/example:GET": {
+        "isDynamic": false,
+        "uri": "/example",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    },
+    "/tables:GET": {
+        "isDynamic": false,
+        "uri": "/tables",
+        "method": "GET",
+        "parameters": [],
+        "optionalParameters": [],
+        "middleware": [],
+        "handler": {},
+        "without": []
+    }
+}

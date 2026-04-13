@@ -15,7 +15,9 @@ final class Doc
 {
     /** @var class-string[] COMPONENTS */
     const array COMPONENTS = [
+        Accordion::class,
         Card::class,
+        CodeBlock::class,
         Markdown::class,
         Messages::class,
         Stack::class,

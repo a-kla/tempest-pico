@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
-/** @var TempestPico\Components\Table $this */
+/**
+ * All the Voodoo happens in Footer.php
+ */
 ?>
 <?= $this() ?>

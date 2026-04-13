@@ -7,21 +7,17 @@ namespace TempestPico\Components;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-// use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
-use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
+use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
-use League\CommonMark\Extension\Table\TableExtension;
-use League\CommonMark\Extension\TaskList\TaskListExtension;
 use League\CommonMark\MarkdownConverter;
 use Tempest\Container\Container;
 use Tempest\Container\Initializer;
 use Tempest\Container\Singleton;
 
-final class MarkdownInitializer implements Initializer
+final class InlineMarkdownInitializer implements Initializer
 {
-    #[Singleton('GFM')]
+    #[Singleton('inline')]
     public function initialize(Container $container): MarkdownConverter
     {
         $config = [
@@ -48,17 +44,12 @@ final class MarkdownInitializer implements Initializer
         $environment = new Environment($config);
 
         $environment
-            ->addExtension(new CommonMarkCoreExtension())
-            ->addExtension(new FrontMatterExtension())
-            // GFM
+            ->addExtension(new InlinesOnlyExtension()) // needs to be the first!
+            // ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new AutolinkExtension())
-            // ->addExtension(new DisallowedRawHtmlExtension()) // disallow all: 'html_input' => 'escape'
             ->addExtension(new StrikethroughExtension()) // TODO: find a Extension for <ins>
-            ->addExtension(new TableExtension())
-            ->addExtension(new TaskListExtension())
             ->addExtension(new SmartPunctExtension())
             ->addExtension(new AttributesExtension());
-
         return new MarkdownConverter($environment);
     }
 }

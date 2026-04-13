@@ -20,7 +20,7 @@ final readonly class Tables
         return new Page(
             title: 'Component Example: Table',
             isStatic: true,
-            main: new Stack([
+            main: new Stack(
                 new Markdown(
                     <<<'MD'
                         You can (ab)use Markdown to create Tables:
@@ -65,11 +65,12 @@ final readonly class Tables
                     ],
                     primaryRow: 'CSS',
                     options: Table::Options(
+                        // @mago-expect analysis:invalid-argument
                         caption: 'Example using the Component',
                         fallback: new Markdown("> I don't know"),
                     ),
                 ),
-            ]),
+            ),
         );
     }
 }

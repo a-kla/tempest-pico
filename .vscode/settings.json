@@ -22,5 +22,19 @@
     "phpstan.suppressWorkspaceMessage": false,
     "phpstan.pro": false,
     "phpstan.tmpDir": "",
-    "phpstan.checkValidity": false
+    "phpstan.checkValidity": false,
+    "cSpell.words": [
+        "mago",
+        "pico",
+        "Pico"
+    ],
+    "editor.rulers": [
+
+        {"column": 80},
+
+        {"column": 100},
+
+        {"column": 120, "color": "#A43535"},
+    ],
+    "todoToIssue.provider": "github"
 }

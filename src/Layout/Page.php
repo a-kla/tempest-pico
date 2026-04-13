@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TempestPico\Layout;
 
 use Tempest\View\View;
-use TempestPico\Components\IsView;
 
 /** Default Layout */
 final class Page implements View
@@ -20,15 +19,17 @@ final class Page implements View
     public function __construct(
         public string $title,
         public View $main,
-        public bool $isStatic = false, // TODO: find out how to autodetect `static:generate` is running
+        public bool $isStatic = false, // TODO: use routes.json
     ) {
         $this->setPaths();
 
         $this->mainNav = new MainNav([
-            '' => 'Default Tempest Example',
-            'example' => 'My Example',
-            'doc/component' => 'Components',
-            'tables' => 'Table Example',
+            'doc/' => 'Overview',
+            'doc/components' => 'Components',
+            'doc/readme' => 'ReadMe',
+            // '' => 'Default Tempest Example',
+            // 'example' => 'My Example',
+            // 'tables' => 'Table Example',
         ]);
     }
 }

@@ -4,19 +4,31 @@ declare(strict_types=1);
 
 namespace TempestPico\Components;
 
-use Tempest\View\View;
+use Deprecated;
+use TempestPico\Support\Html\HtmlViewTree;
 
-#[Doc('Stack multiple components on top of each other to put it in a single View "slot".', ['Helper'])]
-final class Stack implements View
+use function TempestPico\Support\Html\Html;
+
+#[Doc("Deprecated: Use Helper fun `VT();`!\n\nStack multiple components on top of each other to put it in a single View \"slot\".", ['Helper'])]
+final class Stack implements Component
 {
-    use IsView;
+    use IsComponent;
 
     /**
-     * @param View[] $components
+     * @var array<array-key, Component> $components
      **/
+    public array $components;
+
+    #[Deprecated('Use `Html(null, $components);`')]
     public function __construct(
-        public array $components = [],
+        Component ...$components,
     ) {
+        $this->components = $components;
         $this->setPaths();
+    }
+
+    public function getViewTree(): HtmlViewTree
+    {
+        return Html(null, $this->components);
     }
 }

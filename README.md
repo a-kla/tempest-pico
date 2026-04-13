@@ -1,8 +1,46 @@
-# Some Components for [Tempest](https://tempestphp.com) using its Views and [PicoCss]((https://picocss.com/)) + UnoCss
+# Some Components for [Tempest](https://tempestphp.com)
 
-[Example as GitHub Page](https://a-kla.github.io/tempest-pico/example)
+Using its Views and [PicoCss](https://yohn.github.io/PicoCSS/) (+ UnoCss)
 
-## Why not tailwind?
+!!! WIP 🚧
+
+## NEW: Html View Tree Builder
+
+All Components are based on my `Html View Tree Builder`.
+It allows me to build HTML programmatically (without template engines) and full IDE support.
+
+```php
+<?php
+
+use function Tempest\Support\Arr\map_iterable;
+
+$ordert = true;
+$items = [1 => 'Foo', 4 => 'Bar', 9 => 'Baz'];
+
+$list = Html(
+    element: $ordert ? 'ol' : 'ul',
+    content: map_iterable(
+		$items,
+        static fn($item, $id) => Html('li', ["Item #{$id} {$item}"]),
+    ),
+	attributes: ['class' => 'list'],
+);
+
+echo $list->toHtml(); // in the *.view.php: only `{!! $this()->toHtml() !!}` is needed
+?>
+// formatted output:
+<ol class="list">
+    <li>Item #1 Foo</li>
+    <li>Item #4 Bar</li>
+    <li>Item #9 Baz</li>
+</ol>
+```
+
+See [GitHub Page](https://a-kla.github.io/tempest-pico/doc/components)
+
+## FAQ
+
+### Why not tailwind?
 
 I prefer semantic CSS (and HTML) + utility CSS for Modifiers (like the M in BEM). (+ Components with scoped CSS, if necessary).
 
@@ -10,11 +48,11 @@ My code is below /src, /app is the default Tempest (v2) example, just as static 
 
 Take a look at my [Example as GitHub Page](https://a-kla.github.io/tempest-pico/example) and compare the sources.
 
-## Why don't you make more use of the View features?
+### Why don't you make more use of the View features?
 
 I like to have my IDE and static code analysis tools understand my code as much as possible. I don't want to have to guess what variables are available in the template, or what methods I can call on $this. 
 
-## Why you don't use Slots and Dynamic components?
+### Why you don't use Slots and Dynamic components?
 
 Dynamic components only take a string as attribute, so you can't pass anything else.
 

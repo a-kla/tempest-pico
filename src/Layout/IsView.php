@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TempestPico\Components;
+namespace TempestPico\Layout;
 
 use Tempest\View\Renderers\TempestViewRenderer;
 
@@ -29,9 +29,20 @@ trait IsView
     public function setPaths(): void
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        /** @mago-expect analysis:mixed-array-access, mixed-argument */
+        /**
+         * @mago-expect analysis:mixed-array-access, mixed-argument
+         * @phpstan-ignore offsetAccess.notFound
+         */
         $path = str_ends_with(normalize($trace[0]['file']), 'view/src/functions.php')
+            /**
+             * @mago-expect analysis:mixed-array-access, mixed-argument
+             * @phpstan-ignore offsetAccess.notFound
+             */
             ? path($trace[1]['file'])
+            /**
+             * @mago-expect analysis:mixed-array-access, mixed-argument
+             * @phpstan-ignore offsetAccess.notFound
+             */
             : path($trace[0]['file']);
 
         $this->relativeRootPath = $path->dirname()->toString();
