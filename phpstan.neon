@@ -8,3 +8,11 @@ parameters:
         - tests
     excludePaths:
         - vendor
+        analyse:
+            - src/**.view.php
+    typeAliases:
+           MD: 'string'
+           IMD: 'string'
+           Content: 'TempestPico\Support\Html\HtmlViewTree|string|Stringable|Tempest\Support\Html\HtmlString|Tempest\View\View|null'
+           VT: Content|array<Content>
+           

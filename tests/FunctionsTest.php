@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Support\Html\HtmlString;
 
-use function TempestPico\Support\toHtml;
+// use function TempestPico\Support\toHtml;
 
 /**
  * @internal
  */
 class FunctionsTest extends TestCase
 {
-    #[Test]
+    // #[Test]
     public function toHtml(): void
     {
         $this->assertSame(

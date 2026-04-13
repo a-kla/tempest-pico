@@ -9,8 +9,6 @@ use TempestPico\Support\Html\HtmlViewTree;
 
 interface Component extends \Tempest\View\View
 {
-    public function __invoke(): HtmlString;
-
     public function toHtml(): HtmlString;
 
     public function getViewTree(): HtmlViewTree;

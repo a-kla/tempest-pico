@@ -27,5 +27,14 @@
         "mago",
         "pico",
         "Pico"
-    ]
+    ],
+    "editor.rulers": [
+
+        {"column": 80},
+
+        {"column": 100},
+
+        {"column": 120, "color": "#A43535"},
+    ],
+    "todoToIssue.provider": "github"
 }

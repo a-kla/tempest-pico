@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace TempestPico\Components;
 
+use Stringable;
+use Tempest\Support\Html\HtmlString;
 use Tempest\View\View;
 use TempestPico\Support\Html\HtmlViewTree;
 
 use function Tempest\Support\Arr\has_key;
 use function Tempest\Support\Arr\keys;
 use function Tempest\Support\Arr\map_iterable;
-use function TempestPico\Support\composeStr;
-use function TempestPico\Support\Html;
+use function TempestPico\Support\Html\composeStr;
+use function TempestPico\Support\Html\Html;
 
 /**
  * Generate a Table
  *
+ * @mago-expect analysis:malformed-docblock-comment
  * @phpstan-type Opt = array{
  *      caption: null|string,
- *      fallback: string|View,
+ *      fallback: Content,
  *
  *      striped: bool,
  *      scrollable: bool,
@@ -33,9 +36,8 @@ final class Table implements Component
 
     /**
      *
-     * @param array<string, string|Component> $head
-     * @param array<string, string|Component>[] $cells
-     * @mago-expect analysis:non-existent-class-like <= FIXME: Tell Mago that Otp is a type alias
+     * @param array<string, Content> $head
+     * @param array<string, Content>[] $cells
      * @param Opt $options
      */
     public function __construct(
@@ -48,6 +50,11 @@ final class Table implements Component
     }
 
     /**
+     * @param Opt['caption'] $caption
+     * @param Opt['fallback'] $fallback
+     * @param Opt['striped'] $striped
+     * @param Opt['scrollable'] $scrollable
+     * @param Opt['vertical'] $vertical
      *
      * @return Opt
      *
@@ -56,7 +63,7 @@ final class Table implements Component
     static function Options(
         ?string $caption = null,
         // Cell content if unset or null
-        string|View $fallback = '',
+        string|Stringable|HtmlString|View|HtmlViewTree|null $fallback = '',
 
         bool $striped = true,
         bool $scrollable = true,
@@ -87,7 +94,7 @@ final class Table implements Component
             element: 'table',
             content: [
                 // TODO: `slot(name: 'caption', ?wrapper: 'caption', ?if_unset = null)`
-                $this->options['caption'] ? Html('caption', [$this->options['caption']]) : null,
+                $this->options['caption'] ? Html('caption', $this->options['caption']) : null,
                 Html(
                     'thead',
                     [Html(
@@ -106,8 +113,8 @@ final class Table implements Component
                             $rowIds, // not $row to force the right order
                             fn (string $rowId) => (
                                 $rowId === $this->primaryRow
-                                    ? Html('th', [$getCellContent($row, $rowId)], ['scope' => 'row'])
-                                    : Html('td', [$getCellContent($row, $rowId)])
+                                    ? Html('th', $getCellContent($row, $rowId), ['scope' => 'row'])
+                                    : Html('td', $getCellContent($row, $rowId))
                             ),
                         ),
                     )

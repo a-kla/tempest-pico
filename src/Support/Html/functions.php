@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TempestPico\Support;
+namespace TempestPico\Support\Html;
 
 use Deprecated;
 use Stringable;
@@ -10,20 +10,24 @@ use Tempest\Support\Html\HtmlString;
 use Tempest\Support\Str\ImmutableString;
 use Tempest\View\View;
 use TempestPico\Components\Component;
-use TempestPico\Support\Html\HtmlViewTree;
+use TempestPico\Components\InlineMarkdown;
+use TempestPico\Components\Markdown;
 
-use function Tempest\Support\Arr\implode;
+use function Tempest\Support\arr;
 
 /**
  * @param array<string, null|string|Stringable|bool> $attributes
- * @param array<HtmlViewTree|string|Stringable|HtmlString|View|null> $content
+ * @param VT $content
  * */
-function Html(?string $element, array $content = [], array $attributes = []): HtmlViewTree
+function Html(?string $element, HtmlViewTree|string|Stringable|HtmlString|View|null|array $content = [], array $attributes = []): HtmlViewTree
 {
     return (new HtmlViewTree())(element: $element, attributes: $attributes, content: $content);
 }
 
-/** View Tree */
+/** View Tree
+ * Use `VT()` to create a view tree from an array of content. It is a shortcut for `Html(null, $content);`
+ * Non-Html content will be escaped for safe output in HTML.
+ */
 function VT(HtmlViewTree|string|Stringable|HtmlString|View|null ...$content): HtmlViewTree
 {
     return (new HtmlViewTree())(content: $content, element: null);
@@ -49,6 +53,18 @@ function escape(string $s): HtmlString
     return new HtmlString(htmlspecialchars($s));
 }
 
+/** Shortcut to render MarkDown */
+function MD(string $md): HtmlViewTree
+{
+    return new Markdown($md)->getViewTree();
+}
+
+/** Shortcut to render Inline MarkDown */
+function IMD(string $md): HtmlViewTree
+{
+    return new InlineMarkdown($md)->getViewTree();
+}
+
 /**
  * Renders the content of a view or a string.
  * If the content is a string, it will be escaped for safe output in HTML.
@@ -56,7 +72,7 @@ function escape(string $s): HtmlString
  * @param string|View $content The content to render.
  * @return string The rendered content.
  */
-#[Deprecated('Use maybeUnsafe()')]
+#[Deprecated('Use VT()')]
 function renderContent(string|View $content): string
 {
     /*
@@ -70,6 +86,7 @@ function renderContent(string|View $content): string
  * Converts the given $content to an HtmlString.
  * If it not a Component or an HtmlString, it will be escaped for safe output in HTML.
  */
+#[Deprecated('Use VT()')]
 function toHtml(Component|HtmlString|Stringable|string|int|float $content): HtmlString
 {
     if ($content instanceof HtmlString) {
@@ -104,28 +121,29 @@ function toHtml(Component|HtmlString|Stringable|string|int|float $content): Html
  *
  * @param null|string|array<string, bool|callable():bool> $check
  */
-function composeStr(null|string|array $check): ?ImmutableString
+function composeStr(null|string|array $check): false|ImmutableString
 {
     if ($check === null) {
-        return null;
+        return false;
     }
 
     if (is_string($check)) {
-        return new ImmutableString($check);
+        return $check === '' ? false : new ImmutableString($check);
     }
 
-    $strings = [];
+    $strings = arr();
 
     foreach ($check as $string => $isTrue) {
         if (is_callable($isTrue)) {
             $isTrue = $isTrue();
         }
 
-        if (! $isTrue) {
-            continue;
+        if ($isTrue) {
+            $strings->append($string);
         }
-        $strings[] = $string;
     }
 
-    return implode($strings, ' ');
+    // #    $strings = $strings->filter();
+
+    return $strings->isEmpty() ? false : $strings->implode(' ');
 }

@@ -65,6 +65,7 @@ final readonly class Tables
                     ],
                     primaryRow: 'CSS',
                     options: Table::Options(
+                        // @mago-expect analysis:invalid-argument
                         caption: 'Example using the Component',
                         fallback: new Markdown("> I don't know"),
                     ),

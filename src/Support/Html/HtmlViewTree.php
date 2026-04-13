@@ -18,11 +18,11 @@ use function Tempest\Support\Html\is_html_tag;
 use function Tempest\Support\Html\is_void_tag;
 use function Tempest\Support\Str\is_empty;
 use function Tempest\Support\Str\wrap;
-use function TempestPico\Support\escape;
 
 /**
- * Build and render a Abstract Html Tree
+ * Html View Tree Builder
  *
+ * Build a Tree of Html & Views and render it to a HtmlString.
  */
 final class HtmlViewTree
 {
@@ -36,7 +36,7 @@ final class HtmlViewTree
     /** @var array<string, null|string|Stringable|bool> $attributes     */
     private array $attributes = [];
 
-    /** @var ImmutableArray<int, self|string|Stringable|HtmlString|View|null> $children aka content */
+    /** @var ImmutableArray<array-key, self|string|Stringable|HtmlString|View|null> $children aka content */
     private ImmutableArray $children;
 
     private self $current;
@@ -61,7 +61,7 @@ final class HtmlViewTree
         $node->element = $element;
         $node->attributes = $attributes;
 
-        if ($element === null) {
+        if (is_null($element)) {
             try {
                 if (arr($attributes)->isNotEmpty()) {
                     throw new Exception\AttributesForNull(print_r($attributes, true));
@@ -85,7 +85,7 @@ final class HtmlViewTree
     }
 
     /**
-     * Dos not check it is a HTML Element
+     * Does not check it is a HTML Element
      *
      * @param array<self|string|Stringable|HtmlString|View> $content
      * @param array<string, null|string|Stringable|bool> $attributes
@@ -114,7 +114,7 @@ final class HtmlViewTree
         $content = filter($content);
 
         if ($node->isVoid && count($content) > 0) {
-            throw new Exception\VoidWithContent($node->element);
+            throw new Exception\VoidWithContent($node->element ?? 'null');
         }
 
         if (count($content) === 0) {
@@ -131,7 +131,7 @@ final class HtmlViewTree
     private function appendNode(self $node): void
     {
         if ($this->current->isVoid) {
-            throw new Exception\VoidWithContent($this->element);
+            throw new Exception\VoidWithContent($this->element ?? 'null');
         }
 
         $this->current->children = $this->current->children->append($node);
@@ -141,11 +141,14 @@ final class HtmlViewTree
     }
 
     /**
-     * @param array<self|string|Stringable|HtmlString|View> $content
+     * @param self|string|Stringable|HtmlString|View|array<self|string|Stringable|HtmlString|View> $content
      * @param array<string, null|string|Stringable|bool> $attributes
      * */
-    public function __invoke(?string $element, array $content = [], array $attributes = []): self
+    public function __invoke(?string $element, self|string|Stringable|HtmlString|View|array $content = [], array $attributes = []): self
     {
+        if (! is_array($content)) {
+            $content = [$content];
+        }
         $this->appendElement(element: $element, content: $content, attributes: $attributes);
 
         return $this;
@@ -162,14 +165,12 @@ final class HtmlViewTree
         $attributes = $node->attributes ? format_attributes($node->attributes) : '';
 
         $html = $node->children->map(
-            static function ($value, $_) {
-                return match (true) {
-                    $value instanceof HtmlString => $value,
-                    $value instanceof self => $value->render(),
-                    $value instanceof Component => $value(),
-                    $value instanceof View => '- FIXME: How to implement it? -',
-                    default => escape((string) $value),
-                };
+            static fn ($value, $_) => match (true) {
+                $value instanceof HtmlString => $value,
+                $value instanceof self => $value->render(),
+                $value instanceof Component => $value->toHtml(),
+                $value instanceof View => '- FIXME: How to implement it? -',
+                default => escape((string) $value),
             },
         )->implode('');
 

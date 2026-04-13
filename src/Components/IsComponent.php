@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace TempestPico\Components;
 
+use Deprecated;
 use Tempest\Support\Html\HtmlString;
 
 use function Tempest\Support\path;
 use function Tempest\Support\Path\normalize;
 
-/** @phpstan-require-implements \Tempest\View\View */
+/** @phpstan-require-implements Component */
 trait IsComponent
 {
     public string $path;
@@ -21,6 +22,7 @@ trait IsComponent
         $this->setPaths();
     }
 
+    #[Deprecated('use `->toHtml()` for clarity')]
     public function __invoke(): HtmlString
     {
         return $this->toHtml();
@@ -34,9 +36,20 @@ trait IsComponent
     public function setPaths(): void
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        /** @mago-expect analysis:mixed-array-access, mixed-argument */
+        /**
+         * @mago-expect analysis:mixed-array-access, mixed-argument
+         * @phpstan-ignore offsetAccess.notFound
+         */
         $path = str_ends_with(normalize($trace[0]['file']), 'view/src/functions.php')
+            /**
+             * @mago-expect analysis:mixed-array-access, mixed-argument
+             * @phpstan-ignore offsetAccess.notFound
+             */
             ? path($trace[1]['file'])
+            /**
+             * @mago-expect analysis:mixed-array-access, mixed-argument
+             * @phpstan-ignore offsetAccess.notFound
+             */
             : path($trace[0]['file']);
 
         $this->relativeRootPath = $path->dirname()->toString();

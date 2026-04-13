@@ -11,8 +11,8 @@ use TempestPico\Support\Html\HtmlViewTree;
 use function Tempest\get;
 use function TempestPico\Support\Html\VT;
 
-#[Doc('Renders the given GitHub flavored Markdown as HTML. Uses [league/commonmark](https://commonmark.thephpleague.com/2.x/) with close to all Extensions.', ['Helper'])]
-final class Markdown implements Component
+#[Doc('Renders only Markdown as HTML. ', ['Helper'])]
+final class InlineMarkdown implements Component
 {
     use IsComponent;
 
@@ -24,7 +24,7 @@ final class Markdown implements Component
 
     public function getViewTree(): HtmlViewTree
     {
-        $markdown = get(MarkdownConverter::class);
+        $markdown = get(className: MarkdownConverter::class, tag: 'inline');
         /* Using directly HtmlString is dangerous,
          * but since the HTML in the markdown is escaped by league/commonmark, it should be safe to use here. */
         $content = new HtmlString($markdown->convert($this->md)->getContent());

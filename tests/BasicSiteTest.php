@@ -19,8 +19,10 @@ class BasicSiteTest extends IntegrationTestCase
         each(
             [
                 '' => 'Tempest',
-                'example' => 'Example Page',
+                // 'example' => 'Example Page',
                 // 'table' => 'Component Example: Table',
+                'doc' => 'Overview',
+                'doc/components' => 'Components Overview',
             ],
             function (string $content, string $url): void {
                 echo "Testing page: /{$url}\n";

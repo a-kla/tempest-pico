@@ -10,7 +10,7 @@ use TempestPico\Components\Component;
 use TempestPico\Components\IsComponent;
 use TempestPico\Support\Html\HtmlViewTree;
 
-use function TempestPico\Support\Html;
+use function TempestPico\Support\Html\Html;
 
 /** A Component that makes use of HtmlViewTree */
 final class Main implements Component

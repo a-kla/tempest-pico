@@ -12,7 +12,8 @@ use Tempest\Support\Uri\Uri; // used in template
 
 use function Tempest\env; // used in template
 use function Tempest\Support\Str\ensure_ends_with;
-use function TempestPico\Support\toHtml as _;
+
+// use function TempestPico\Support\Html\toHtml as _;
 
 // Works as expected!
 $baseUrl = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');

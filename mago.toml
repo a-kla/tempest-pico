@@ -1,9 +1,10 @@
 php-version = "8.4.0"
 
 [source]
-paths = ['src', "app", "tests"]
+paths = ['src', "tests"]
 includes = ["vendor"]
 excludes = [
+  "src/*/*.view.php",
   "./vendor/symfony/cache/Traits/ValueWrapper.php",
   "./vendor/composer",
 ]
@@ -24,14 +25,15 @@ preserve-breaking-attribute-list = true
 preserve-breaking-conditional-expression = true
 
 [linter.rules]
-tagged-todo =  { enabled = false }
+tagged-fixme = { enabled = false }
+tagged-todo = { enabled = false }
 literal-named-argument = { enabled = false }
 function-name = { enabled = false }
 
 [analyzer]
 analyze-dead-code = true
-ignore = [ "literal-named-argument", "implicit-to-string-cast" ]
+ignore = [ "literal-named-argument", "implicit-to-string-cast", "invalid-argument" ]
+# FIXME: ignore = invalid-argument -> MAGO don't know global type alias nor type-import?
+# Mago does not currently support reading type aliases from PHPStan's phpstan.neon configuration file.
+# Mago see them as `unknown-ref(T)` and rise a `invalid-argument` errors
 
-# , "string-member-selector"
-# find-unused-parameters = true
-# enforce-class-finality = true

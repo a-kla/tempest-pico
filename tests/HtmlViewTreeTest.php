@@ -15,8 +15,8 @@ use Tests\Views\Main;
 
 use function Tempest\Support\Arr\map_iterable;
 use function Tempest\Support\str;
-use function TempestPico\Support\Html;
-use function TempestPico\Support\VT;
+use function TempestPico\Support\Html\Html;
+use function TempestPico\Support\Html\VT;
 
 /**
  * @internal
@@ -28,11 +28,10 @@ class HtmlViewTreeTest extends TestCase
     public function rendersWithContent(): void
     {
         $text = 'Text';
-        $VT = (new HtmlViewTree())('p', [$text]);
+        $VT = (new HtmlViewTree())('p', $text);
         $expected = "<p>{$text}</p>";
 
         $html = $VT->render();
-        print_r($html);
 
         $this->assertSame(
             $expected,
@@ -70,7 +69,7 @@ class HtmlViewTreeTest extends TestCase
     public function generatesEscapedStrings(): void
     {
         $var = '<';
-        $func = fn () => VT(' />'); // Helper Function VT (View Tree)
+        $func = static fn () => VT(' />'); // Helper Function VT (View Tree)
         $VT = VT($var, 'br', $func(), Html('br'));
 
         $expected = '&lt;br /&gt;<br />';
@@ -84,7 +83,7 @@ class HtmlViewTreeTest extends TestCase
     #[Test]
     public function canAppendContentMultiTimes(): void
     {
-        $VT = Html('html')('body')('main', [html('h1', ['Headline'])]);
+        $VT = Html('html')('body')('main', [html('h1', 'Headline')]);
 
         $VT = $VT->appendContent(
             Html('hr'),
@@ -175,7 +174,7 @@ class HtmlViewTreeTest extends TestCase
     {
         // $this->expectException(AttributesForNull::class);
 
-        $VT = Html(element: null, attributes: ['just' => 'warn'], content: ['some']);
+        $VT = Html(element: null, attributes: ['just' => 'warn'], content: 'some');
         $expected = 'some';
 
         $this->assertSame(
@@ -220,7 +219,7 @@ class HtmlViewTreeTest extends TestCase
         // classic view.php
         $header = new HeaderView('New Home');
 
-        $VT = Html('body', [$header]);
+        $VT = Html('body', $header);
 
         $expected = str(<<<'HTML'
             <body>
@@ -274,16 +273,16 @@ class HtmlViewTreeTest extends TestCase
         $main = new Main('A complex Example');
 
         $aside = Html('aside', [
-            Html('h1', [$text]),
+            Html('h1', $text),
             Html(element: 'p', content: [
                 'Foo? ',
-                Html('i', ['No. Bar!'], ['class' => 'bar']),
+                Html('i', 'No. Bar!', ['class' => 'bar']),
             ]),
             '- <= more Text… => -',
         ]);
 
         // Caution! Renders the main View NOW, all others on `render()`
-        $main = Html('main', [$aside, $main()->unwrap('<main>', '</main>')]);
+        $main = Html('main', [$aside, $main->toHtml()->unwrap('<main>', '</main>')]);
 
         $VT = Html('body', [$header, $main, $footer]);
 
