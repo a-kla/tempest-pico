@@ -36,10 +36,11 @@
         {"column": 120, "color": "#A43535"},
     ],
       "github.copilot.chat.commitMessageGeneration.instructions": [
+    { "text": "Example: `✅ test: add tests for composeStr()`" },
     { "text": "Prefix with [GitMoji](https://gitmoji.dev/)" },
     { "text": "Use imperative mood: 'Add feature' not 'Added feature'" },
-    { "text": "Keep subject line under 50 characters" },
-    { "text": "Use types: feat, fix, docs, style, refactor, perf, test, chore, ci" },
+    { "text": "Keep subject line under 60 characters" },
+    { "text": "Use types: test, docs, style, refactor, perf, chore, ci, cli,feat, fix" },
     { "text": "Include scope when relevant (e.g., api, ui, auth)" },
     { "text": "Reference issue numbers with # prefix" },
     { "text": "Use english" }
