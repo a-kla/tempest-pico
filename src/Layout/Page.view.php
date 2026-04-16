@@ -25,7 +25,7 @@ use function Tempest\Support\Str\ensure_ends_with;
  * This is a workaround for the fact that Tempest sometimes puts the template in a function.
  * Static code analysis tools love this behavior! And I love wasting time debugging it! */
 
-$scopedVariables['baseUrl'] = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
+$scopedVariables['baseUrl'] = ensure_ends_with(Uri::from(env('ASSET_PATH', '/')), '/');
 
 ?>
 <x-mybase :title="$this->title">
