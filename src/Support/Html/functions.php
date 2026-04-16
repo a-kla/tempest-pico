@@ -7,13 +7,15 @@ namespace TempestPico\Support\Html;
 use Deprecated;
 use Stringable;
 use Tempest\Support\Html\HtmlString;
-use Tempest\Support\Str\ImmutableString;
 use Tempest\View\View;
 use TempestPico\Components\Component;
 use TempestPico\Components\InlineMarkdown;
 use TempestPico\Components\Markdown;
 
-use function Tempest\Support\arr;
+use function Tempest\Support\Arr\filter;
+use function Tempest\Support\Arr\implode;
+use function Tempest\Support\Arr\is_empty;
+use function Tempest\Support\Arr\is_list;
 
 /**
  * @param array<string, null|string|Stringable|bool> $attributes
@@ -119,31 +121,36 @@ function toHtml(Component|HtmlString|Stringable|string|int|float $content): Html
  * echo $class; // "border border-color-blue"
  * ```
  *
- * @param null|string|array<string, bool|callable():bool> $check
+ * @param null|string|string[]|array<string, bool|callable():bool> $check
  */
-function composeStr(null|string|array $check): false|ImmutableString
+function composeStr(null|string|array $check): false|string
 {
-    if ($check === null) {
-        return false;
+    ll($check);
+    switch (true) {
+        case is_null($check):
+            return false;
+
+        case is_string($check):
+            return $check === '' ? false : $check;
+
+        case is_list($check):
+            return implode($check, ' ')->toString();
+
+        default:
+            $strings = [];
+
+            foreach ($check as $string => $isTrue) {
+                if (is_callable($isTrue)) {
+                    $isTrue = $isTrue();
+                }
+
+                if ($isTrue) {
+                    $strings[] = $string;
+                }
+            }
+
+            $strings = filter($strings);
+
+            return is_empty($strings) ? false : implode($strings, ' ')->toString();
     }
-
-    if (is_string($check)) {
-        return $check === '' ? false : new ImmutableString($check);
-    }
-
-    $strings = arr();
-
-    foreach ($check as $string => $isTrue) {
-        if (is_callable($isTrue)) {
-            $isTrue = $isTrue();
-        }
-
-        if ($isTrue) {
-            $strings->append($string);
-        }
-    }
-
-    // #    $strings = $strings->filter();
-
-    return $strings->isEmpty() ? false : $strings->implode(' ');
 }
