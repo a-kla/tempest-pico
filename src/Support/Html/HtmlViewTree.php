@@ -7,6 +7,7 @@ namespace TempestPico\Support\Html;
 use Stringable;
 use Tempest\Support\Arr\ImmutableArray;
 use Tempest\Support\Html\HtmlString;
+use Tempest\View\Renderers\TempestViewRenderer;
 use Tempest\View\View;
 use TempestPico\Components\Component;
 
@@ -169,7 +170,7 @@ final class HtmlViewTree
                 $value instanceof HtmlString => $value,
                 $value instanceof self => $value->render(),
                 $value instanceof Component => $value->toHtml(),
-                $value instanceof View => '- FIXME: How to implement it? -',
+                $value instanceof View => \Tempest\get(TempestViewRenderer::class)->render($value), // '- FIXME: How to test it without container??? -',
                 default => escape((string) $value),
             },
         )->implode('');
@@ -184,12 +185,4 @@ final class HtmlViewTree
 
         return new HtmlString($html);
     }
-
-    /*
-     * public function __toString(): string
-     * {
-     * var_dump($this);
-     * return $this->render();
-     * }
-     */
 }
