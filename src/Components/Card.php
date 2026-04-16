@@ -17,7 +17,7 @@ final class Card implements Component
 
     /**
      * @param null|string|array<string, bool|callable(): bool> $class
-     * @param null|string|array<string, bool|callable(): bool> $style
+     * @param null|string|string[]|array<string, bool|callable(): bool> $style
      **/
     public function __construct(
         public HtmlString|Component|HtmlViewTree $content,
