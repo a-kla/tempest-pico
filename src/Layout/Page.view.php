@@ -24,6 +24,7 @@ use function Tempest\Support\Str\ensure_ends_with;
  *
  * This is a workaround for the fact that Tempest sometimes puts the template in a function.
  * Static code analysis tools love this behavior! And I love wasting time debugging it! */
+
 $scopedVariables['baseUrl'] = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '/');
 
 ?>
@@ -33,16 +34,5 @@ $scopedVariables['baseUrl'] = ensure_ends_with(Uri::from(env('LINK_TO', '/')), '
     {{-- TODO: SEO view--}}
     <meta name="robots" content="noindex,nofollow">
   </x-slot>
-  <header class="container">
-    <hgroup>
-      <h1>Tempest-Pico</h1>
-      <p>Components for Tempest Framework with Pico CSS + UnoCSS </p>
-    </hgroup>
-    {!! ($this->mainNav)() !!}
-  </header>
-  <main class="container">
-    <h1>{{ $this->title }}</h1>
-
-    {!! ($this->main)() !!}
-  </main>
+  <?= $this->toHtml(); ?>
 </x-mybase>

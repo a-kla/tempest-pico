@@ -19,7 +19,6 @@ final readonly class Tables
     {
         return new Page(
             title: 'Component Example: Table',
-            isStatic: true,
             main: new Stack(
                 new Markdown(
                     <<<'MD'

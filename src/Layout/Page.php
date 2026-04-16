@@ -4,24 +4,36 @@ declare(strict_types=1);
 
 namespace TempestPico\Layout;
 
-use Tempest\View\View;
+use Tempest\Http\Request;
+use Tempest\Router\RouteConfig;
+use TempestPico\Components\Component;
+use TempestPico\Support\Html\HtmlViewTree;
+
+use function Tempest\get;
+use function Tempest\Support\arr;
+use function Tempest\Support\Str\ends_with;
+use function TempestPico\Support\Html\Html;
+use function TempestPico\Support\Html\MD;
+use function TempestPico\Support\Html\VT;
 
 /** Default Layout */
-final class Page implements View
+final class Page implements Component
 {
-    use IsView;
+    use IsLayout;
 
     public MainNav $mainNav;
+    public bool $isStatic; // TODO: use routes.json
 
-    /**
-     * @param View $main
-     **/
     public function __construct(
         public string $title,
-        public View $main,
-        public bool $isStatic = false, // TODO: use routes.json
+        public HtmlViewTree $main,
     ) {
         $this->setPaths();
+
+        $staticRoutes = arr(get(RouteConfig::class)->staticRoutes['GET'])
+            ->filter(static fn ($data, string $uri) => ! ends_with($uri, '/'))
+            ->keys();
+        $this->isStatic = $staticRoutes->includes(get(Request::class)->path); // FIXME: querys?
 
         $this->mainNav = new MainNav([
             'doc/' => 'Overview',
@@ -31,5 +43,28 @@ final class Page implements View
             // 'example' => 'My Example',
             // 'tables' => 'Table Example',
         ]);
+    }
+
+    public function getViewTree(): HtmlViewTree
+    {
+        return VT(
+            Html(
+                'header',
+                Html('hgroup', [
+                    Html('h1', 'Tempest-Pico'),
+                    MD('Tempest v2 Starter Kit: View Builder + Pico CSS (+ UnoCSS if you need more)'),
+                    $this->mainNav,
+                ]),
+                ['class' => 'container'],
+            ),
+            Html(
+                'main',
+                [
+                    Html('h1', $this->title),
+                    $this->main,
+                ],
+                ['class' => 'container'],
+            ),
+        );
     }
 }

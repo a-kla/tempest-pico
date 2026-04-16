@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace TempestPico\Components;
 
 use Attribute;
+use TempestPico\Support\Html\HtmlViewTree;
 
 #[Attribute(Attribute::TARGET_CLASS)]
 final class Doc
@@ -19,9 +20,11 @@ final class Doc
         Card::class,
         CodeBlock::class,
         Markdown::class,
-        Messages::class,
-        Stack::class,
+        Message::class,
+        // Stack::class,
         Table::class,
+        HtmlViewTree::class,
+        TestView::class,
     ];
 
     const TAGS = [
