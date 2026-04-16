@@ -8,12 +8,12 @@ use Tempest\View\IsView;
 use Tempest\View\View;
 
 #[Doc('Proof: old Tempest View and my Components work in combination')]
-final class TestView implements View
+final class MixedView implements View
 {
     use IsView;
 
     public function __construct()
     {
-        $this->path = __DIR__ . '/TestView.view.php';
+        $this->path = __DIR__ . '/MixedView.view.php';
     }
 }

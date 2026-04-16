@@ -24,7 +24,7 @@ final class Doc
         // Stack::class,
         Table::class,
         HtmlViewTree::class,
-        TestView::class,
+        MixedView::class,
     ];
 
     const TAGS = [
