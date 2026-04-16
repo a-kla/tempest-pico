@@ -25,13 +25,13 @@ return VT(
     ),
     new Accordion(
         'acco',
-        ['Button (contrast outline)' => $content['Section #*2*']],
-        Accordion::Options('button-outline', 'contrast'),
+        ['Button (secondary outline)' => $content['Section #*2*']],
+        Accordion::Options('button-outline', 'secondary'),
     ),
     new Accordion(
         'acco',
-        ['Button (secondary)' => $content['Section #*3*']],
-        Accordion::Options(btnColor: 'secondary'),
+        ['Button (contrast)' => $content['Section #*3*']],
+        Accordion::Options(btnColor: 'contrast', variant: 'button'),
     ),
 
     new Accordion(
