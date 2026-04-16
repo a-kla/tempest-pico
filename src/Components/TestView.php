@@ -7,7 +7,7 @@ namespace TempestPico\Components;
 use Tempest\View\IsView;
 use Tempest\View\View;
 
-#[Doc('Just plan HTML in a Tempest View for testing')]
+#[Doc('Proof: old Tempest View and my Components work in combination')]
 final class TestView implements View
 {
     use IsView;
