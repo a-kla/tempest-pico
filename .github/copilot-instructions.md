@@ -4,7 +4,7 @@
 
 **Tech Stack**: PHP 8.4, Tempest Framework (v2), HtmlViewTree, UnoCSS, Pico CSS, PHPUnit, PHPStan (level 7)
 
-**Yohn's Fork of PicoCSS is used** - see `https://yohn.github.io/PicoCSS/` and `https://github.com/Yohn/PicoCSS/`
+**Yohns Fork of PicoCSS is used** - see <https://yohn.github.io/PicoCSS/> and <https://github.com/Yohn/PicoCSS/>
 
 **HtmlViewTree**: a alternative to string-based template engines, see **Html View Tree Builder** below.
 
@@ -25,7 +25,7 @@ pnpm unocss --watch   # Watch CSS during development
 
 ---
 
-## Type Hints and common abbreviations
+## Type Hints and Abbreviations
 
 - `MD` → Markdown (GitHub flavored), helper: `MD()`
 - `IMD` → Inline Markdown (no Block elements like `<p>`), helper: `IMD()`
@@ -36,7 +36,6 @@ pnpm unocss --watch   # Watch CSS during development
   - `Component`  →  any class implementing `IsComponent` (renders to HTML via `getViewTree()`)
   - `View`  →  ! not implemented ! - any other Tempest View (should work - with Issues)
 - `VT`/`HtmlViewTree`  →  A Tree of the above types, use `VT()` or `Html(…)` helper to create it
-
 
 ---
 
@@ -217,7 +216,7 @@ Before pushing:
 
 ## Tips for AI Agents
 
-- **Run `./tempest routes --json` if you need Data about amiable Pages / Routes** - JSON formatted
+- **Run `./tempest routes --json` if you need Data about available Pages / Routes** - JSON formatted
 - **Short Doc Blocks** — Don't repeat yourself or simple PHP code, only add `@param` etc. if it improve type hinting 
 - **Always run `composer qa` after changes** to catch formatting, test, and lint issues
 - **PHPStan level 7 is strict** — it will catch undefined classes, missing imports, type mismatches
