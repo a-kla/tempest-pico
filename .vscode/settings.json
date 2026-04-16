@@ -15,7 +15,6 @@
     "phpstan.suppressTimeoutMessage": false,
     "phpstan.showProgress": true,
     "phpstan.showTypeOnHover": true,
-    "phpstan.enableLanguageServer": false,
     "phpstan.ignoreErrors": [
         "Xdebug: .*"
     ],
@@ -36,5 +35,4 @@
 
         {"column": 120, "color": "#A43535"},
     ],
-    "todoToIssue.provider": "github"
 }
