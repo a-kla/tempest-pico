@@ -20,6 +20,7 @@ final class Doc
         Card::class,
         CodeBlock::class,
         Markdown::class,
+        InlineMarkdown::class,
         Message::class,
         // Stack::class,
         Table::class,

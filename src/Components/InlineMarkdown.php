@@ -11,7 +11,7 @@ use TempestPico\Support\Html\HtmlViewTree;
 use function Tempest\get;
 use function TempestPico\Support\Html\VT;
 
-#[Doc('Renders only Markdown as HTML. ', ['Helper'])]
+#[Doc('Renders only inline Markdown as HTML. Shortcut: `IMD()`', ['Helper'])]
 final class InlineMarkdown implements Component
 {
     use IsComponent;
