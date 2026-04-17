@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace TempestPico\Components\Examples;
 
 use TempestPico\Components\Accordion;
-use TempestPico\Components\Messages;
+use TempestPico\Components\Message;
 
 use function TempestPico\Support\Html\VT;
 
 $content = [
     'Section #*1*' => "# Markdown\n\nThis is *Markdown*!",
-    'Section #*2*' => new Messages(['variant' => 'info', 'md' => 'This is a Component']),
+    'Section #*2*' => new Message('info', 'This is a Component'),
     'Section #*3*' => VT("# Markdown\n\nThis is **NOT** *Markdown*!"),
 ];
 
