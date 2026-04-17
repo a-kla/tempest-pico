@@ -34,10 +34,11 @@ final class Message implements Component
                 content: MD($this->md),
                 header: IMD('**Error**'),
                 class: 'outline-4 outline-double outline-red',
-                style: '--pico-card-background-color: #ff000060;
-                                --pico-card-border-color: rgb(248 113 113);
-                                --pico-card-sectioning-background-color: #ff0000c0;
-                                ',
+                style: [
+                    '--pico-card-background-color: #ff000060;',
+                    '--pico-card-border-color: rgb(248 113 113);',
+                    '--pico-card-sectioning-background-color: #ff0000c0;',
+                ],
             ),
             'warning' => new Card(
                 content: MD($this->md),
