@@ -1,16 +1,33 @@
 # Some Components for [Tempest](https://tempestphp.com)
 
-Using its Views and [PicoCss](https://yohn.github.io/PicoCSS/) (+ UnoCss)
+## !!! WIP 🚧
+### This is just a preview…
 
-!!! WIP 🚧
+Tempest-Pico is still a work in progress and 
+built on top of Tempest **v2** (I still need *PHP 8.4*).
 
-## NEW: Html View Tree Builder
+Right now I use [Yohns PicoCSS Fork](https://yohn.github.io/PicoCSS/), but i like to replace it by Components with almost no style
+(headless) + a extra CSS. So you can switch to your own CSS,
+~~ACSS~~ ~~Bootstrap~~ ~~Tailwind~~ ~~MaterializeCSS~~ ~~UnoCSS~~ daisyUI 
+or what ever is the hyped Framework right now.
 
-All Components are based on my `Html View Tree Builder`.
-It allows me to build HTML programmatically (without template engines) and full IDE support.
+This Doc and the Components use my `Tempest-HtmlView`.
+*Tempest-HtmlView* allows me to build HTML programmatically and with full IDE support.
+It is a bit like
+[laravel-html](https://packagist.org/packages/spatie/laravel-html), but much simpler.
 
 ```php
-<?php
+// laravel-html:
+$text = 'Hello world!'; // only null or string
+html()-p()>->span()->text($text);
+
+// Tempest-HtmlView:
+$wrapper = 'p'; // or null or any other non-void-element
+$content = 'Hello world!' // con be another `view`/Component 
+Html($wrapper)('span', $content);
+
+
+// A small example:
 
 use function Tempest\Support\Arr\map_iterable;
 
@@ -18,15 +35,15 @@ $ordert = true;
 $items = [1 => 'Foo', 4 => 'Bar', 9 => 'Baz'];
 
 $list = Html(
-    element: $ordert ? 'ol' : 'ul',
+    $ordert ? 'ol' : 'ul',
+    attributes: ['class' => 'list'],
     content: map_iterable(
-		$items,
-        static fn($item, $id) => Html('li', ["Item #{$id} {$item}"]),
+      $items,
+      static fn($item, $id) => Html('li', "Item #{$id} {$item}"),
     ),
-	attributes: ['class' => 'list'],
 );
 
-echo $list->toHtml(); // in the *.view.php: only `{!! $this()->toHtml() !!}` is needed
+echo $list->toHtml();
 ?>
 // formatted output:
 <ol class="list">
@@ -35,6 +52,8 @@ echo $list->toHtml(); // in the *.view.php: only `{!! $this()->toHtml() !!}` is 
     <li>Item #9 Baz</li>
 </ol>
 ```
+
+Tempests mandatorily `*.view.php` files are created automatically as `{!! $this()->toHtml() !!}` is the only required content.
 
 See [GitHub Page](https://a-kla.github.io/tempest-pico/doc/components)
 
