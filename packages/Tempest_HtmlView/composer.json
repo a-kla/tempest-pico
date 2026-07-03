@@ -1,0 +1,35 @@
+{
+  "name": "a-kl/tempest-htmlview",
+  "description": "Helpers / Extension for Tempest\\View - AssetManager, Html-View-Tree-Builder",
+  "type": "library",
+  "version": "0.0.0-dev",
+  "require": {
+    "php": "^8.4.21",
+    "tempest/framework": "^2.14"
+  },
+  "require-dev": {
+    "carthage-software/mago": "^1.30",
+    "phpunit/phpunit": "^13.2"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AKl\\Tempest_HtmlView\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+
+  },
+ "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+   "authors": [
+    {
+      "name": "A-Kl"
+    }
+  ],
+  "minimum-stability": "stable"
+}

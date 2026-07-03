@@ -1,0 +1,71 @@
+{
+  "name": "akl/tempest-pico",
+  "type": "project",
+  "require": {
+    "php": "^8.4.21",
+    "tempest/framework": "^2.14",
+    "a-kl/tempest-htmlview": "^0.0.0-dev",
+    "yohn/picocss": "^2.2"
+  },
+      "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/Tempest_HtmlView"
+        }
+    ],
+  "require-dev": {
+    "phpunit/phpunit": "^12.5.25",
+    "symfony/var-dumper": "^7.4.8",
+    "carthage-software/mago": "^1.28.0",
+    "phpstan/phpstan": "^2.1.55",
+    "symfony/console": "^8.0.11",
+    "phpstan/extension-installer": "^1.4.3",
+    "rector/type-perfect": "^2.1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "TempestPico\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "@php ./vendor/bin/tempest install framework -f",
+      "@php ./tempest discovery:generate --no-interaction"
+    ],
+    "post-autoload-dump": [
+      "@php ./vendor/bin/tempest discovery:generate --no-interaction"
+    ],
+    "phpunit": "vendor/bin/phpunit --testdox --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
+    "fmt": "vendor/bin/mago fmt",
+    "lint": "vendor/bin/mago lint --fix --format-after-fix",
+    "rector": "vendor/bin/rector --dry-run ",
+    "rector:fix": "vendor/bin/rector",
+    "qa": [
+      "composer fmt",
+      "composer phpunit",
+      "composer lint"
+    ],
+    "update:routes": "./tempest routes --json > src/generated/routes.json",
+    "gen": [
+      "./tempest static:clean --force",
+      "./tempest static:generate --verbose",
+      "pnpm unocss"
+    ]
+  },
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "carthage-software/mago": true,
+      "phpstan/extension-installer": true
+    }
+  }
+}

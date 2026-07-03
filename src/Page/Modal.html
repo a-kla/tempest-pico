@@ -1,0 +1,64 @@
+<style>
+    :is(:modal, dialog[open]) {
+        padding: 0;
+        border: 0;
+
+        width: fit-content;
+        box-shadow: -14px -12px 20px 1px #252a34;
+
+        > article{
+        max-width: min(60ch, 90vw);
+        }
+
+        &::backdrop {
+            background-image: linear-gradient(45deg,
+                    rebeccapurple,
+                    dodgerblue,
+                    green,
+                    orange);
+            opacity: 0.6;
+            backdrop-filter: blur(10px);
+        }
+    }
+</style>
+
+<p>
+    // inside Modal.html…
+</p>
+
+<dialog open closedby="any">
+    <article>
+        <header>
+            <hgroup>
+                <h2>pur Html example imported as PHP8.4 DOM</h2>
+                <h1>News</h1>
+            </hgroup>
+        </header>
+        <p>In modern Browsers* you can close this pur HTML Modal simply by clicking or taping outside it. Or pressing
+            the <kbd>Esc</kbd> key </p>
+        <dl>
+            <dt>modern Browsers</dt>
+            <dd>Since 2025: Chrome, Edge, Firefox, Opera, Chrome Android, Firefox for Android, Opera Android, Samsung
+                Internet, WebView Android (not Safari as of 2026-05)</dd>
+        </dl>
+        <footer>
+            <form method="dialog">
+                <button autofocus>OK</button>
+            </form>
+        </footer>
+    </article>
+</dialog>
+
+<button command="show-modal" commandfor="exampleModal">Open Example dialog</button>
+<dialog id="exampleModal" closedby="any">
+    <article>
+        <header>
+            <h2>Example Modal</h2>
+        </header>
+        <p>This dialog was opened using an HTML invoker command.</p>
+        <p>It don't needs JS for this anymore.</p>
+        <footer>
+            <button commandfor="exampleModal" command="close">Close</button>
+        </footer>
+    </article>
+</dialog>

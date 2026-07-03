@@ -1,0 +1,31 @@
+.tempest
+node_modules/
+vendor/
+/public/main.css
+/public/**/*.html
+/package-lock.json
+/.php-cs-fixer.cache
+.env
+.idea
+.phpunit.result.cache
+log/
+*.local.config.php
+*.dev.config.php
+
+vite-tempest
+public/build/
+
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+!.env.github
+
+# Logs
+logs
+*.log
+
+# vendor bin
+phpantom_lsp
+rector.php

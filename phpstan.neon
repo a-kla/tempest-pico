@@ -1,0 +1,16 @@
+parameters:
+    level: 7
+    scanFiles:
+        - .env
+    paths:
+        - src
+        - app
+        - tests
+    excludePaths:
+        - vendor
+        analyseAndScan:
+            - *.view.php
+    type_perfect:
+        null_over_false: true
+        no_mixed: true
+        narrow_param: true

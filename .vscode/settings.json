@@ -1,0 +1,83 @@
+{
+    "phpstan.singleFileMode": false,
+    "phpstan.binPath": "vendor/bin/phpstan",
+    "phpstan.binCommand": [],
+    "phpstan.configFile": "phpstan.neon,phpstan.neon.dist,phpstan.dist.neon",
+    "phpstan.paths": {},
+    "phpstan.dockerContainerName": "",
+    "phpstan.rootDir": "",
+    "phpstan.options": [],
+    "phpstan.enableStatusBar": true,
+    "phpstan.memoryLimit": "1G",
+    "phpstan.enabled": true,
+    "phpstan.projectTimeout": 300000,
+    "phpstan.timeout": 300000,
+    "phpstan.suppressTimeoutMessage": false,
+    "phpstan.showProgress": true,
+    "phpstan.showTypeOnHover": true,
+    "phpstan.ignoreErrors": [
+        "Xdebug: .*"
+    ],
+    "phpstan.suppressWorkspaceMessage": false,
+    "phpstan.pro": false,
+    "phpstan.tmpDir": "",
+    "phpstan.checkValidity": false,
+    "cSpell.words": [
+        "laravel",
+        "mago",
+        "pico",
+        "Pico"
+    ],
+    "editor.rulers": [
+        {
+            "column": 80
+        },
+        {
+            "column": 100
+        },
+        {
+            "column": 120,
+            "color": "#A43535"
+        },
+    ],
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        // { "text": "Use imperative mood: 'Add feature' not 'Added feature'" },
+        {
+            "text": "Keep subject line under 60 characters"
+        },
+        // { "text": "Use types: test, docs, style, refactor, perf, chore, ci, cli,feat, fix" },
+        {
+            "text": "Example: `✅ Tests (FunctionsTest): test composeStr() added`"
+        },
+        {
+            "text": "Don't use ✨ for everyting."
+        },
+        {
+            "text": "Prefix: [GitMoji](.github/GitCommitEmoji.md)"
+        },
+        {
+            "text": "Example: `🐛 Fix (#<issue>): <issue title>\n<message>`"
+        },
+        {
+            "text": "Format: <GitMoji> [type [(scope)]:] [<short message>\n]<message> "
+        },
+        {
+            "text": "Include scope when relevant (e.g., api, ui, auth)"
+        },
+        {
+            "text": "Reference issue numbers with # prefix"
+        },
+        {
+            "text": "Write in english"
+        }
+    ],
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.completion.suggestRelativeToPartialUseDeclaration": 2,
+    "intelephense.diagnostics.typeErrors": false,
+    "intelephense.diagnostics.undefinedVariables": "local",
+    "intelephense.diagnostics.unreachableCode": false,
+    "chat.tools.terminal.autoApprove": {
+        "./vendor/bin/phpunit": true
+    }
+}

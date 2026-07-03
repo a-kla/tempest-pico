@@ -1,0 +1,46 @@
+/**
+ * Credits: Temani Afif
+ *      https://codepen.io/t_afif/embed/ZEyOJNW?height=600&default-tab=result&embed-version=2
+ *      https://dev.to/afif/a-multi-line-css-only-typewriter-effect-3op3
+ *
+ * var:
+ *      -n: number of steps (chars)
+ *      -color: default: blue
+ */
+p:has(.type) {
+    text-align: center;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+
+    --text-color: var(--color, blue);
+    color: var(--text-color);
+
+    .type {
+        color: transparent;
+        background:
+            linear-gradient(-90deg, var(--text-color) 5px, #0000 0) 10px 0,
+            linear-gradient(var(--text-color) 0 0) 0 0;
+        background-size: calc(var(--n)*1ch) 200%;
+        background-clip: padding-box, text;
+        background-repeat: no-repeat;
+
+        animation:
+            /* set BG for each char */
+            b .5s infinite steps(1),
+            t calc(var(--n)*.2s) steps(var(--n)) forwards;
+        animation-delay: 2s;
+    }
+}
+
+@keyframes t {
+    from {
+        background-size: 0 200%
+    }
+}
+
+@keyframes b {
+    50% {
+        background-position: 0 -100%, 0 0
+    }
+}
