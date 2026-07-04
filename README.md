@@ -1,10 +1,18 @@
 # Some Components for [Tempest](https://tempestphp.com)
 
-## !!! WIP 🚧
+> [!CAUTION]
+> Outdated Github Page
+>
+> ```
+> @php ./vendor/bin/tempest discovery:generate --no-interaction
+> PHP Fatal error:  Uncaught TypeError: Cannot assign null to property Tempest\Discovery\DiscoveryLocation::$path of type string in /home/runner/work/tempest-pico/tempest-pico/vendor/tempest/framework/packages/discovery/src/DiscoveryLocation.php:24
+> ```
+> No time to fix atm…
 
-### This is just a preview…
+## This is just a preview…
 
-Tempest-Pico is still a work in progress and
+> [!IMPORTANT]
+> ⚠️ Tempest-Pico is still a work in progress and built on top of Tempest **v2** (I still need *PHP 8.4*).Tempest-Pico is still a work in progress and
 built on top of Tempest **v2** (I still need *PHP 8.4*).
 
 Right now I use [Yohns PicoCSS Fork](https://yohn.github.io/PicoCSS/), but i like to replace it by Components with almost no style
