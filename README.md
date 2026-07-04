@@ -1,5 +1,14 @@
 # Some Components for [Tempest](https://tempestphp.com)
 
+> [!CAUTION]
+> Outdated Github Page
+>
+> ```
+> @php ./vendor/bin/tempest discovery:generate --no-interaction
+> PHP Fatal error:  Uncaught TypeError: Cannot assign null to property Tempest\Discovery\DiscoveryLocation::$path of type string in /home/runner/work/tempest-pico/tempest-pico/vendor/tempest/framework/packages/discovery/src/DiscoveryLocation.php:24
+> ```
+> No time to fix atm…
+
 ## This is just a preview…
 
 > [!IMPORTANT]
