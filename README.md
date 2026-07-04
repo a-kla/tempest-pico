@@ -12,8 +12,7 @@
 ## This is just a preview…
 
 > [!IMPORTANT]
-> ⚠️ Tempest-Pico is still a work in progress and built on top of Tempest **v2** (I still need *PHP 8.4*).Tempest-Pico is still a work in progress and
-built on top of Tempest **v2** (I still need *PHP 8.4*).
+> ⚠️ Tempest-Pico is still a work in progress and built on top of Tempest **v2** (I still need *PHP 8.4*).
 
 Right now I use [Yohns PicoCSS Fork](https://yohn.github.io/PicoCSS/), but i like to replace it by Components with almost no style
 (headless) + extra CSS. So you can switch to your own CSS,
